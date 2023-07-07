@@ -29,7 +29,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="Wkb-Tc-xJv" userLabel="Cell Image">
-                                                    <rect key="frame" x="0.0" y="0.0" width="361" height="182"/>
+                                                    <rect key="frame" x="16" y="4" width="329" height="174"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="16"/>
@@ -37,31 +37,37 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 августа 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6g-pJ-YTn" userLabel="Date Label">
-                                                    <rect key="frame" x="8" y="158" width="101.66666666666667" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="27 августа 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6g-pJ-YTn" userLabel="Date Label">
+                                                    <rect key="frame" x="24" y="154" width="101.66666666666666" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" name="YP White"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2us-dY-VMx">
-                                                    <rect key="frame" x="317" y="0.0" width="44" height="44"/>
+                                                    <rect key="frame" x="301" y="4" width="44" height="44"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="Active"/>
+                                                    <state key="normal" image="like_active"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Wkb-Tc-xJv" secondAttribute="trailing" id="0bP-Ma-utN"/>
+                                                <constraint firstAttribute="trailing" secondItem="Wkb-Tc-xJv" secondAttribute="trailing" constant="16" id="0bP-Ma-utN"/>
                                                 <constraint firstItem="Wkb-Tc-xJv" firstAttribute="bottom" secondItem="f6g-pJ-YTn" secondAttribute="bottom" constant="8" id="958-D5-RNq"/>
-                                                <constraint firstAttribute="bottom" secondItem="Wkb-Tc-xJv" secondAttribute="bottom" id="BBN-gb-zD0"/>
+                                                <constraint firstAttribute="bottom" secondItem="Wkb-Tc-xJv" secondAttribute="bottom" constant="4" id="BBN-gb-zD0"/>
                                                 <constraint firstItem="Wkb-Tc-xJv" firstAttribute="trailing" secondItem="2us-dY-VMx" secondAttribute="trailing" id="KZz-ne-Dp7"/>
-                                                <constraint firstItem="Wkb-Tc-xJv" firstAttribute="leading" secondItem="Myv-My-Mmp" secondAttribute="leading" id="TU5-lx-4kF"/>
+                                                <constraint firstItem="Wkb-Tc-xJv" firstAttribute="leading" secondItem="Myv-My-Mmp" secondAttribute="leading" constant="16" id="TU5-lx-4kF"/>
                                                 <constraint firstItem="f6g-pJ-YTn" firstAttribute="leading" secondItem="Wkb-Tc-xJv" secondAttribute="leading" constant="8" id="jMy-QS-W1n"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="f6g-pJ-YTn" secondAttribute="trailing" constant="8" id="lkO-BO-Ygh"/>
-                                                <constraint firstItem="Wkb-Tc-xJv" firstAttribute="top" secondItem="Myv-My-Mmp" secondAttribute="top" id="nsQ-tG-OA4"/>
+                                                <constraint firstItem="Wkb-Tc-xJv" firstAttribute="top" secondItem="Myv-My-Mmp" secondAttribute="top" constant="4" id="nsQ-tG-OA4"/>
                                                 <constraint firstItem="2us-dY-VMx" firstAttribute="top" secondItem="Wkb-Tc-xJv" secondAttribute="top" id="yXn-nQ-7Ot"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="YP Background"/>
+                                        <connections>
+                                            <outlet property="cellImageView" destination="Wkb-Tc-xJv" id="o4t-Tr-WPg"/>
+                                            <outlet property="dateLabel" destination="f6g-pJ-YTn" id="ats-gM-uAU"/>
+                                            <outlet property="imageView" destination="Wkb-Tc-xJv" id="nnq-YI-Xiz"/>
+                                            <outlet property="likeButton" destination="2us-dY-VMx" id="rY3-by-nb2"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -90,7 +96,7 @@
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
-        <image name="Active" width="44" height="44"/>
+        <image name="like_active" width="44" height="44"/>
         <namedColor name="YP Background">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
