@@ -1,7 +1,7 @@
 import UIKit
 
 class ImagesListViewController: UIViewController {
-
+    
     private let photoNames: [String] = Array(0..<20).map{"\($0)"}
     
     private lazy var dateFormatter: DateFormatter = {
@@ -14,16 +14,16 @@ class ImagesListViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-            .lightContent
-        }
+        .lightContent
+    }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
     
-    //заполняем ячейку
     func configCell (for cell: ImagesListCell, with indexPath: IndexPath) {
         
         guard let image = UIImage(named: photoNames[indexPath.row]) else { return }
@@ -42,12 +42,10 @@ class ImagesListViewController: UIViewController {
 
 extension ImagesListViewController: UITableViewDataSource {
     
-    //количество ячеек в секции таблицы
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photoNames.count
     }
     
-    //должен возвращать ячейку
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
@@ -63,10 +61,10 @@ extension ImagesListViewController: UITableViewDataSource {
 }
 
 extension ImagesListViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
     
-    //высота ячейки зависит от размеров фото и является динамической
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let image = UIImage(named: photoNames[indexPath.row]) else {
             return 0
