@@ -62,9 +62,6 @@ extension ImagesListViewController: UITableViewDataSource {
 
 extension ImagesListViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let image = UIImage(named: photoNames[indexPath.row]) else {
             return 0
