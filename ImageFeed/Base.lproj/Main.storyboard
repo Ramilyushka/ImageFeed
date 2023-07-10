@@ -18,18 +18,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uc0-vU-9Zb">
-                                <rect key="frame" x="16" y="59" width="361" height="759"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" name="YP Black"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImagesListCell" rowHeight="182" id="iIX-Dk-wKW" customClass="ImagesListCell" customModule="ImageFeed" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="361" height="182"/>
+                                        <rect key="frame" x="0.0" y="50" width="393" height="182"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iIX-Dk-wKW" id="Myv-My-Mmp">
-                                            <rect key="frame" x="0.0" y="0.0" width="361" height="182"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="182"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="Wkb-Tc-xJv" userLabel="Cell Image">
-                                                    <rect key="frame" x="0.0" y="4" width="361" height="174"/>
+                                                    <rect key="frame" x="16" y="4" width="361" height="174"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="16"/>
@@ -44,17 +44,17 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2us-dY-VMx">
-                                                    <rect key="frame" x="317" y="4" width="44" height="44"/>
+                                                    <rect key="frame" x="333" y="4" width="44" height="44"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="like_active"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Wkb-Tc-xJv" secondAttribute="trailing" id="0bP-Ma-utN"/>
+                                                <constraint firstAttribute="trailing" secondItem="Wkb-Tc-xJv" secondAttribute="trailing" constant="16" id="0bP-Ma-utN"/>
                                                 <constraint firstItem="Wkb-Tc-xJv" firstAttribute="bottom" secondItem="f6g-pJ-YTn" secondAttribute="bottom" constant="8" id="958-D5-RNq"/>
                                                 <constraint firstAttribute="bottom" secondItem="Wkb-Tc-xJv" secondAttribute="bottom" constant="4" id="BBN-gb-zD0"/>
                                                 <constraint firstItem="Wkb-Tc-xJv" firstAttribute="trailing" secondItem="2us-dY-VMx" secondAttribute="trailing" id="KZz-ne-Dp7"/>
-                                                <constraint firstItem="Wkb-Tc-xJv" firstAttribute="leading" secondItem="Myv-My-Mmp" secondAttribute="leading" id="TU5-lx-4kF"/>
+                                                <constraint firstItem="Wkb-Tc-xJv" firstAttribute="leading" secondItem="Myv-My-Mmp" secondAttribute="leading" constant="16" id="TU5-lx-4kF"/>
                                                 <constraint firstItem="f6g-pJ-YTn" firstAttribute="leading" secondItem="Wkb-Tc-xJv" secondAttribute="leading" constant="8" id="jMy-QS-W1n"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="f6g-pJ-YTn" secondAttribute="trailing" constant="8" id="lkO-BO-Ygh"/>
                                                 <constraint firstItem="Wkb-Tc-xJv" firstAttribute="top" secondItem="Myv-My-Mmp" secondAttribute="top" constant="4" id="nsQ-tG-OA4"/>
@@ -79,10 +79,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstItem="uc0-vU-9Zb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="5BI-Jg-8GS"/>
-                            <constraint firstItem="uc0-vU-9Zb" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottomMargin" id="YFy-U0-REO"/>
-                            <constraint firstItem="uc0-vU-9Zb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="bJU-ii-4ze"/>
-                            <constraint firstItem="uc0-vU-9Zb" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="o33-NA-a5m"/>
+                            <constraint firstItem="uc0-vU-9Zb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="QxT-yL-kTO"/>
+                            <constraint firstItem="uc0-vU-9Zb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iBy-Kc-Ox2"/>
+                            <constraint firstItem="uc0-vU-9Zb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lwM-m4-IuA"/>
+                            <constraint firstAttribute="bottom" secondItem="uc0-vU-9Zb" secondAttribute="bottom" id="n8E-w9-q5R"/>
                         </constraints>
                     </view>
                     <connections>
