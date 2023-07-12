@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A824D3FC2A5F2C9D006A6F5E /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A824D3FB2A5F2C9D006A6F5E /* SingleImageViewController.swift */; };
 		A8A11A532A25026600A40217 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11A522A25026600A40217 /* AppDelegate.swift */; };
 		A8A11A552A25026600A40217 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11A542A25026600A40217 /* SceneDelegate.swift */; };
 		A8A11A572A25026600A40217 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11A562A25026600A40217 /* ImagesListViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A824D3FB2A5F2C9D006A6F5E /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		A8A11A4F2A25026600A40217 /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8A11A522A25026600A40217 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8A11A542A25026600A40217 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				A8A11A562A25026600A40217 /* ImagesListViewController.swift */,
 				A8EBC25D2A5745FF0057ED6D /* ImagesListCell.swift */,
+				A824D3FB2A5F2C9D006A6F5E /* SingleImageViewController.swift */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 				A8B640242A5EFF2400218167 /* ProfileViewController.swift in Sources */,
 				A8A11A572A25026600A40217 /* ImagesListViewController.swift in Sources */,
 				A8A11A532A25026600A40217 /* AppDelegate.swift in Sources */,
+				A824D3FC2A5F2C9D006A6F5E /* SingleImageViewController.swift in Sources */,
 				A8EBC25E2A5745FF0057ED6D /* ImagesListCell.swift in Sources */,
 				A8A11A552A25026600A40217 /* SceneDelegate.swift in Sources */,
 				A8EBC25C2A5744AC0057ED6D /* UIColor+Extensions.swift in Sources */,
