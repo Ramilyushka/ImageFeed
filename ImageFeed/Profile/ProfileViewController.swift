@@ -14,4 +14,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var loginProfileLabel: UILabel!
+    
+    
 }

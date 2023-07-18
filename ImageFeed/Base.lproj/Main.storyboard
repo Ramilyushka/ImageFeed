@@ -23,8 +23,8 @@
                         </tabBarAppearance>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="5zJ-zw-FUP"/>
-                        <segue destination="vGK-gm-MY6" kind="relationship" relationship="viewControllers" id="KRt-my-EwV"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="fAm-iN-grA"/>
+                        <segue destination="vGK-gm-MY6" kind="relationship" relationship="viewControllers" id="cqA-aJ-8fc"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k3f-6z-nkz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -104,62 +104,89 @@
                             <constraint firstItem="uc0-vU-9Zb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="QxT-yL-kTO"/>
                             <constraint firstItem="uc0-vU-9Zb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iBy-Kc-Ox2"/>
                             <constraint firstItem="uc0-vU-9Zb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lwM-m4-IuA"/>
-                            <constraint firstAttribute="bottom" secondItem="uc0-vU-9Zb" secondAttribute="bottom" id="n8E-w9-q5R"/>
+                            <constraint firstItem="uc0-vU-9Zb" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="n8E-w9-q5R"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="tab_main_active" id="Qmg-nR-6M9"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab_main_active" id="Hbp-Ih-XnC" userLabel="Tab bar item"/>
                     <navigationItem key="navigationItem" id="KdB-uK-4Rx"/>
                     <connections>
                         <outlet property="tableView" destination="uc0-vU-9Zb" id="9Pr-Fz-hJD"/>
-                        <segue destination="Lpw-KF-GgV" kind="presentation" identifier="ShowSingleImage" id="IMp-xx-Uwc"/>
+                        <segue destination="EQL-lN-Xsz" kind="presentation" identifier="ShowSingleImage" modalPresentationStyle="fullScreen" id="OJd-ao-bYG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-391" y="-618"/>
+            <point key="canvasLocation" x="-391" y="-573"/>
         </scene>
         <!--Single Image View Controller-->
-        <scene sceneID="ovg-Ce-cnR">
+        <scene sceneID="v2I-GW-mWB">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="Lpw-KF-GgV" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="LUc-7V-KSq">
+                <viewController id="EQL-lN-Xsz" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wFp-Q8-141">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="3j2-4m-s5k">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="0Wo-Ld-4eD">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l0S-he-fVx">
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="OIi-7K-Vd3">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="OIi-7K-Vd3" secondAttribute="trailing" id="F9Z-6m-9rF"/>
+                                    <constraint firstItem="OIi-7K-Vd3" firstAttribute="leading" secondItem="0Wo-Ld-4eD" secondAttribute="leading" id="KCk-BS-y4U"/>
+                                    <constraint firstAttribute="bottom" secondItem="OIi-7K-Vd3" secondAttribute="bottom" id="OoO-U6-cZb"/>
+                                    <constraint firstItem="OIi-7K-Vd3" firstAttribute="top" secondItem="0Wo-Ld-4eD" secondAttribute="top" id="gvR-c8-yUN"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Qcc-NW-P0U"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="m3x-Sr-u7U"/>
+                                <connections>
+                                    <outlet property="delegate" destination="EQL-lN-Xsz" id="O3o-z3-gfY"/>
+                                </connections>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iyd-mS-Ppb" userLabel="Back">
                                 <rect key="frame" x="8" y="56" width="48" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="eig-ks-xou"/>
-                                    <constraint firstAttribute="width" constant="48" id="x8n-Lv-kMX"/>
+                                    <constraint firstAttribute="height" constant="48" id="G9N-uq-6MR"/>
+                                    <constraint firstAttribute="width" constant="48" id="JA4-0Y-fpS"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="backward"/>
                                 <connections>
-                                    <action selector="backButtonClicked:" destination="Lpw-KF-GgV" eventType="touchUpInside" id="WVu-YC-fbd"/>
+                                    <action selector="backButtonClicked:" destination="EQL-lN-Xsz" eventType="touchUpInside" id="9XC-3l-3tV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-g5-H3d" userLabel="Share">
+                                <rect key="frame" x="182" y="776" width="50" height="50"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="sharing"/>
+                                <connections>
+                                    <action selector="sharingButtonClicked:" destination="EQL-lN-Xsz" eventType="touchUpInside" id="ncH-UZ-EJR"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="iyx-Kg-2jn"/>
+                        <viewLayoutGuide key="safeArea" id="6en-UE-NE2"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstItem="3j2-4m-s5k" firstAttribute="trailing" secondItem="LUc-7V-KSq" secondAttribute="trailing" id="0qD-p7-Y0U"/>
-                            <constraint firstItem="3j2-4m-s5k" firstAttribute="bottom" secondItem="LUc-7V-KSq" secondAttribute="bottom" id="25V-Ts-Bbf"/>
-                            <constraint firstItem="l0S-he-fVx" firstAttribute="leading" secondItem="iyx-Kg-2jn" secondAttribute="leading" constant="8" id="4Gr-j2-0Bd"/>
-                            <constraint firstItem="3j2-4m-s5k" firstAttribute="top" secondItem="LUc-7V-KSq" secondAttribute="top" id="OoM-nE-7Ic"/>
-                            <constraint firstItem="l0S-he-fVx" firstAttribute="top" secondItem="LUc-7V-KSq" secondAttribute="topMargin" constant="8" id="hpQ-nB-CsI"/>
-                            <constraint firstItem="3j2-4m-s5k" firstAttribute="leading" secondItem="LUc-7V-KSq" secondAttribute="leading" id="rhQ-w1-pwm"/>
+                            <constraint firstItem="6en-UE-NE2" firstAttribute="bottom" secondItem="iMs-g5-H3d" secondAttribute="bottom" constant="36" id="CBb-ex-D3U"/>
+                            <constraint firstItem="0Wo-Ld-4eD" firstAttribute="trailing" secondItem="6en-UE-NE2" secondAttribute="trailing" id="DBS-QD-2RM"/>
+                            <constraint firstItem="0Wo-Ld-4eD" firstAttribute="bottom" secondItem="wFp-Q8-141" secondAttribute="bottom" id="G17-u1-4Ef"/>
+                            <constraint firstItem="Iyd-mS-Ppb" firstAttribute="top" secondItem="6en-UE-NE2" secondAttribute="top" constant="8" id="NGH-3D-xaw"/>
+                            <constraint firstItem="Iyd-mS-Ppb" firstAttribute="leading" secondItem="6en-UE-NE2" secondAttribute="leading" constant="8" id="NHq-5V-FCU"/>
+                            <constraint firstItem="iMs-g5-H3d" firstAttribute="centerX" secondItem="6en-UE-NE2" secondAttribute="centerX" id="Rfm-Jl-uYV"/>
+                            <constraint firstItem="6en-UE-NE2" firstAttribute="leading" secondItem="0Wo-Ld-4eD" secondAttribute="leading" id="alp-Bh-x02"/>
+                            <constraint firstAttribute="top" secondItem="0Wo-Ld-4eD" secondAttribute="top" id="l5O-WC-nwj"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="singleImageView" destination="3j2-4m-s5k" id="zMB-K9-gpO"/>
+                        <outlet property="scrollView" destination="0Wo-Ld-4eD" id="1na-s4-riC"/>
+                        <outlet property="singleImageView" destination="OIi-7K-Vd3" id="i6x-F7-Iq3"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jyy-fn-4MU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6by-5N-Frt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="435" y="-618"/>
+            <point key="canvasLocation" x="347.82608695652175" y="-573.21428571428567"/>
         </scene>
         <!--Profile-->
         <scene sceneID="uJH-9A-RBF">
@@ -242,10 +269,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="0" width="200" height="132"/>
+        <image name="0" width="1200" height="795"/>
         <image name="backward" width="24" height="24"/>
         <image name="exit" width="44" height="44"/>
         <image name="like_active" width="44" height="44"/>
+        <image name="sharing" width="50" height="50"/>
         <image name="stub" width="70" height="70"/>
         <image name="tab_main_active" width="30" height="30"/>
         <image name="tab_profile_active" width="30" height="30"/>
