@@ -126,7 +126,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="0Wo-Ld-4eD">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Wo-Ld-4eD">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="OIi-7K-Vd3">
@@ -175,8 +175,8 @@
                             <constraint firstItem="Iyd-mS-Ppb" firstAttribute="top" secondItem="6en-UE-NE2" secondAttribute="top" constant="8" id="NGH-3D-xaw"/>
                             <constraint firstItem="Iyd-mS-Ppb" firstAttribute="leading" secondItem="6en-UE-NE2" secondAttribute="leading" constant="8" id="NHq-5V-FCU"/>
                             <constraint firstItem="iMs-g5-H3d" firstAttribute="centerX" secondItem="6en-UE-NE2" secondAttribute="centerX" id="Rfm-Jl-uYV"/>
-                            <constraint firstItem="6en-UE-NE2" firstAttribute="leading" secondItem="0Wo-Ld-4eD" secondAttribute="leading" id="alp-Bh-x02"/>
-                            <constraint firstAttribute="top" secondItem="0Wo-Ld-4eD" secondAttribute="top" id="l5O-WC-nwj"/>
+                            <constraint firstItem="0Wo-Ld-4eD" firstAttribute="leading" secondItem="6en-UE-NE2" secondAttribute="leading" id="alp-Bh-x02"/>
+                            <constraint firstItem="0Wo-Ld-4eD" firstAttribute="top" secondItem="wFp-Q8-141" secondAttribute="top" id="l5O-WC-nwj"/>
                         </constraints>
                     </view>
                     <connections>
@@ -195,73 +195,10 @@
                     <view key="view" contentMode="scaleToFill" id="Ayi-Bd-J2Y">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stub" translatesAutoresizingMaskIntoConstraints="NO" id="ZUj-Th-Y4O" userLabel="Avatar Image">
-                                <rect key="frame" x="16" y="80" width="70" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="6ym-qk-wNH"/>
-                                    <constraint firstAttribute="height" constant="70" id="aD1-ma-T4n"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="35"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jqd-X5-cGu">
-                                <rect key="frame" x="16" y="158" width="382" height="27.5"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                                <color key="textColor" name="YP White"/>
-                                <nil key="highlightedColor"/>
-                                <size key="shadowOffset" width="0.0" height="0.0"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceX-nB-brY">
-                                <rect key="frame" x="16" y="217.5" width="382" height="16"/>
-                                <accessibility key="accessibilityConfiguration" label="Description Label"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" name="YP White"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjX-ZZ-1hE">
-                                <rect key="frame" x="16" y="193.5" width="382" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" name="YP Gray"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ifm-SP-Lit">
-                                <rect key="frame" x="354" y="93" width="44" height="44"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="exit"/>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Iul-Ni-QJa"/>
-                        <color key="backgroundColor" name="YP Black"/>
-                        <constraints>
-                            <constraint firstItem="Jqd-X5-cGu" firstAttribute="leading" secondItem="ZUj-Th-Y4O" secondAttribute="leading" id="4w5-Ak-4Vc"/>
-                            <constraint firstItem="Iul-Ni-QJa" firstAttribute="trailing" secondItem="Ifm-SP-Lit" secondAttribute="trailing" constant="16" id="HTu-z6-xqG"/>
-                            <constraint firstItem="vjX-ZZ-1hE" firstAttribute="leading" secondItem="Jqd-X5-cGu" secondAttribute="leading" id="J1w-uA-8tN"/>
-                            <constraint firstItem="Jqd-X5-cGu" firstAttribute="top" secondItem="ZUj-Th-Y4O" secondAttribute="bottom" constant="8" id="NAs-7i-R1q"/>
-                            <constraint firstItem="ceX-nB-brY" firstAttribute="trailing" secondItem="Jqd-X5-cGu" secondAttribute="trailing" id="Zea-Fg-q6A"/>
-                            <constraint firstItem="ZUj-Th-Y4O" firstAttribute="leading" secondItem="Iul-Ni-QJa" secondAttribute="leading" constant="16" id="fAD-Xz-P87"/>
-                            <constraint firstItem="ZUj-Th-Y4O" firstAttribute="top" secondItem="Iul-Ni-QJa" secondAttribute="top" constant="32" id="frG-Pf-hjm"/>
-                            <constraint firstItem="ceX-nB-brY" firstAttribute="leading" secondItem="Jqd-X5-cGu" secondAttribute="leading" id="hJK-BH-3TO"/>
-                            <constraint firstItem="Jqd-X5-cGu" firstAttribute="trailing" secondItem="Iul-Ni-QJa" secondAttribute="trailing" constant="-16" id="iy0-g1-L1k"/>
-                            <constraint firstItem="vjX-ZZ-1hE" firstAttribute="top" secondItem="Jqd-X5-cGu" secondAttribute="bottom" constant="8" id="jAF-8r-PHH"/>
-                            <constraint firstItem="Ifm-SP-Lit" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZUj-Th-Y4O" secondAttribute="trailing" id="lTY-lu-Fjv"/>
-                            <constraint firstItem="vjX-ZZ-1hE" firstAttribute="trailing" secondItem="Jqd-X5-cGu" secondAttribute="trailing" id="rcp-Hf-C2T"/>
-                            <constraint firstItem="Ifm-SP-Lit" firstAttribute="top" secondItem="Iul-Ni-QJa" secondAttribute="top" constant="45" id="vBE-NV-n2W"/>
-                            <constraint firstItem="ceX-nB-brY" firstAttribute="top" secondItem="vjX-ZZ-1hE" secondAttribute="bottom" constant="8" id="yjR-IZ-I52"/>
-                        </constraints>
+                        <color key="backgroundColor" name="YP White"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="tab_profile_active" id="RFA-Fc-wTZ"/>
-                    <connections>
-                        <outlet property="avatarImageView" destination="ZUj-Th-Y4O" id="ZWj-Lg-Ma3"/>
-                        <outlet property="descriptionLabel" destination="ceX-nB-brY" id="Qog-WY-XKp"/>
-                        <outlet property="loginProfileLabel" destination="vjX-ZZ-1hE" id="Tsr-4I-Y98"/>
-                        <outlet property="logoutButton" destination="Ifm-SP-Lit" id="PrE-4b-qSy"/>
-                        <outlet property="nameLabel" destination="Jqd-X5-cGu" id="LSl-7T-Z58"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m1j-5l-2tK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -271,10 +208,8 @@
     <resources>
         <image name="0" width="1200" height="795"/>
         <image name="backward" width="24" height="24"/>
-        <image name="exit" width="44" height="44"/>
         <image name="like_active" width="44" height="44"/>
         <image name="sharing" width="50" height="50"/>
-        <image name="stub" width="70" height="70"/>
         <image name="tab_main_active" width="30" height="30"/>
         <image name="tab_profile_active" width="30" height="30"/>
         <namedColor name="YP Background">
@@ -282,9 +217,6 @@
         </namedColor>
         <namedColor name="YP Black">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="YP Gray">
-            <color red="0.68235294117647061" green="0.68627450980392157" blue="0.70588235294117652" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="YP White">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
