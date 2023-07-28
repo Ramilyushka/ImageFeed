@@ -30,11 +30,11 @@ class SingleImageViewController: UIViewController {
         rescaleAndCenterImageInScrollView(image: image)
     }
     
-    @IBAction func backButtonClicked(_ sender: Any) {
+    @IBAction func didTapBackButton(_ sender: Any) {
        dismiss(animated: true)
     }
     
-    @IBAction func sharingButtonClicked(_ sender: Any) {
+    @IBAction func didTapSharingButton(_ sender: Any) {
         let items = [image]
         let share = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
         present(share, animated: true)

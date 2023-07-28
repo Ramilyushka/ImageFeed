@@ -20,14 +20,14 @@ class ProfileViewController: UIViewController {
         
         view.backgroundColor = .ypBlack
         
-        avatarImageViewСonstructor()
-        logoutButtonСonstructor()
-        nameLabelСonstructor()
-        loginProfileLabelСonstructor()
-        descriptionLabelСonstructor()
+        constructAvatarImageView()
+        constructLogoutButton()
+        constructNameLabel()
+        constructLoginProfileLabel()
+        constructDescriptionLabel()
     }
     
-    private func avatarImageViewСonstructor() {
+    private func constructAvatarImageView() {
         
         let image = UIImage(named: "photo") ?? UIImage()
         
@@ -47,12 +47,12 @@ class ProfileViewController: UIViewController {
         self.avatarImageView = imageView
     }
     
-    private func logoutButtonСonstructor() {
+    private func constructLogoutButton() {
         
         let button = UIButton.systemButton(
             with: UIImage(named: "logout") ?? UIImage(),
             target: self,
-            action: #selector(logoutButtonClicked))
+            action: #selector(didTapLogoutButton))
         
         button.tintColor = .ypRed
         
@@ -67,11 +67,7 @@ class ProfileViewController: UIViewController {
         self.logoutButton = button
     }
     
-    @IBAction func logoutButtonClicked(_ sender: Any) {
-        //code
-    }
-    
-    private func nameLabelСonstructor() {
+    private func constructNameLabel() {
         let label = UILabel()
         label.text = "Екатерина Новикова"
         label.font = UIFont.boldSystemFont(ofSize: 23)
@@ -87,7 +83,7 @@ class ProfileViewController: UIViewController {
         self.nameLabel = label
     }
     
-    private func loginProfileLabelСonstructor() {
+    private func constructLoginProfileLabel() {
         let label = UILabel()
         label.text = "@ekaterina_nov"
         label.font = UIFont.systemFont(ofSize: 13)
@@ -103,7 +99,7 @@ class ProfileViewController: UIViewController {
         self.loginProfileLabel = label
     }
     
-    private func descriptionLabelСonstructor() {
+    private func constructDescriptionLabel() {
         
         let label = UILabel()
         label.text = "Hello, world!"
@@ -118,5 +114,9 @@ class ProfileViewController: UIViewController {
         label.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor).isActive = true
         
         self.descriptionLabel = label
+    }
+    
+    @IBAction func didTapLogoutButton(_ sender: Any) {
+        //code
     }
 }
