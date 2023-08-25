@@ -15,6 +15,8 @@
 		A8A11A5C2A25026800A40217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8A11A5B2A25026800A40217 /* Assets.xcassets */; };
 		A8A11A5F2A25026800A40217 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8A11A5D2A25026800A40217 /* LaunchScreen.storyboard */; };
 		A8A9A36B2A7441EA00F39954 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A9A36A2A7441EA00F39954 /* Constants.swift */; };
+		A8A9A36F2A7458ED00F39954 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A9A36E2A7458ED00F39954 /* AuthViewController.swift */; };
+		A8A9A3712A745ADC00F39954 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A9A3702A745ADC00F39954 /* WebViewViewController.swift */; };
 		A8B640242A5EFF2400218167 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B640232A5EFF2400218167 /* ProfileViewController.swift */; };
 		A8EBC25C2A5744AC0057ED6D /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8EBC25B2A5744AC0057ED6D /* UIColor+Extensions.swift */; };
 		A8EBC25E2A5745FF0057ED6D /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8EBC25D2A5745FF0057ED6D /* ImagesListCell.swift */; };
@@ -31,6 +33,8 @@
 		A8A11A5E2A25026800A40217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A8A11A602A25026800A40217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8A9A36A2A7441EA00F39954 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A8A9A36E2A7458ED00F39954 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		A8A9A3702A745ADC00F39954 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		A8B640232A5EFF2400218167 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A8EBC25B2A5744AC0057ED6D /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		A8EBC25D2A5745FF0057ED6D /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
@@ -66,10 +70,11 @@
 		A8A11A512A25026600A40217 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
-				A8A9A36A2A7441EA00F39954 /* Constants.swift */,
-				A8B640222A5EFEF400218167 /* Profile */,
 				A8A11A522A25026600A40217 /* AppDelegate.swift */,
 				A8A11A542A25026600A40217 /* SceneDelegate.swift */,
+				A8A9A36A2A7441EA00F39954 /* Constants.swift */,
+				A8A9A36D2A7458DE00F39954 /* Auth */,
+				A8B640222A5EFEF400218167 /* Profile */,
 				A8EBC25F2A5746310057ED6D /* ImagesList */,
 				A8EBC25A2A57444F0057ED6D /* Helpers */,
 				A8A11A582A25026600A40217 /* Main.storyboard */,
@@ -78,6 +83,15 @@
 				A8A11A602A25026800A40217 /* Info.plist */,
 			);
 			path = ImageFeed;
+			sourceTree = "<group>";
+		};
+		A8A9A36D2A7458DE00F39954 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				A8A9A36E2A7458ED00F39954 /* AuthViewController.swift */,
+				A8A9A3702A745ADC00F39954 /* WebViewViewController.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		A8B640222A5EFEF400218167 /* Profile */ = {
@@ -177,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8A9A3712A745ADC00F39954 /* WebViewViewController.swift in Sources */,
 				A8B640242A5EFF2400218167 /* ProfileViewController.swift in Sources */,
 				A8A11A572A25026600A40217 /* ImagesListViewController.swift in Sources */,
 				A8A11A532A25026600A40217 /* AppDelegate.swift in Sources */,
@@ -184,6 +199,7 @@
 				A8EBC25E2A5745FF0057ED6D /* ImagesListCell.swift in Sources */,
 				A8A11A552A25026600A40217 /* SceneDelegate.swift in Sources */,
 				A8EBC25C2A5744AC0057ED6D /* UIColor+Extensions.swift in Sources */,
+				A8A9A36F2A7458ED00F39954 /* AuthViewController.swift in Sources */,
 				A8A9A36B2A7441EA00F39954 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
