@@ -31,7 +31,7 @@ class SingleImageViewController: UIViewController {
     }
     
     @IBAction func didTapBackButton(_ sender: Any) {
-       dismiss(animated: true)
+       dismiss(animated: true, completion: nil)
     }
     
     @IBAction func didTapSharingButton(_ sender: Any) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="D8u-5C-gb9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rUH-nA-byM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -15,18 +15,18 @@
             <objects>
                 <viewController id="WDR-3E-WWJ" customClass="AuthViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lwi-WX-MDU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="auth_screen_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gm8-C0-McZ">
-                                <rect key="frame" x="177" y="417" width="60" height="60"/>
+                                <rect key="frame" x="177" y="447" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="L7n-Sq-C3K"/>
                                     <constraint firstAttribute="height" constant="60" id="ode-er-nXx"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KYo-hU-QRo">
-                                <rect key="frame" x="16" y="700" width="382" height="48"/>
+                                <rect key="frame" x="16" y="724" width="382" height="48"/>
                                 <color key="backgroundColor" name="YP White"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="r5r-SD-kPR"/>
@@ -122,7 +122,7 @@
         <!--Splash View Controller-->
         <scene sceneID="QoH-gN-0fL">
             <objects>
-                <viewController id="rUH-nA-byM" customClass="SplashViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SplashViewController" id="rUH-nA-byM" customClass="SplashViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NQe-SS-e5e">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -143,7 +143,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="D8u-5C-gb9" kind="presentation" id="rQ2-7I-XSu"/>
+                        <segue destination="D8u-5C-gb9" kind="presentation" identifier="ShowAuthenticationScreen" modalPresentationStyle="fullScreen" id="rQ2-7I-XSu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ma6-uV-qcv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -153,7 +153,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="zV0-dj-fPT">
             <objects>
-                <tabBarController id="g20-CT-th3" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="g20-CT-th3" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PCf-Gk-7xq">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -295,7 +295,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="backward"/>
                                 <connections>
-                                    <action selector="backButtonClicked:" destination="EQL-lN-Xsz" eventType="touchUpInside" id="9XC-3l-3tV"/>
+                                    <action selector="didTapBackButton:" destination="EQL-lN-Xsz" eventType="touchUpInside" id="7OE-SA-shX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-g5-H3d" userLabel="Share">
@@ -303,7 +303,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="sharing"/>
                                 <connections>
-                                    <action selector="sharingButtonClicked:" destination="EQL-lN-Xsz" eventType="touchUpInside" id="ncH-UZ-EJR"/>
+                                    <action selector="didTapSharingButton:" destination="EQL-lN-Xsz" eventType="touchUpInside" id="StR-wq-7fE"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -351,7 +351,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D8u-5C-gb9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="KM2-Hs-nfJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

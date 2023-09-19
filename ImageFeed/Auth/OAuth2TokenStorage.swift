@@ -13,7 +13,7 @@ class OAuth2TokenStorage {
     
     var token: String? {
         get {
-            let bearerToken = userDefaults.string(forKey: "token") ?? ""
+            let bearerToken = userDefaults.string(forKey: "token")
             return bearerToken
         }
         set {

@@ -9,8 +9,8 @@ import UIKit
 import WebKit
 
 protocol WebViewViewControllerDelegate: AnyObject {
-    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) //WebView получил код
-    func webViewViewControllerDidCancel(_ vc: WebViewViewController) //пользователь нажал кнопку назад и отменил авторизацию
+    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController)
 }
 
 class WebViewViewController: UIViewController {
@@ -86,24 +86,22 @@ class WebViewViewController: UIViewController {
 
 extension WebViewViewController: WKNavigationDelegate {
     
-    //метод вызывается, когда в результате действий пользователя WKWebView готовится совершить навигационные действия
     func webView(
         _ webView: WKWebView,
         decidePolicyFor navigationAction: WKNavigationAction,
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
             if let code = code(from: navigationAction) {
                 delegate?.webViewViewController(self, didAuthenticateWithCode: code)
-                decisionHandler(.cancel) //отменить навигацию
+                decisionHandler(.cancel)
             } else {
                 decisionHandler(.allow)
             }
     }
     
-    //возвращает код авторизации, если он получен
     private func code(from navigationAction: WKNavigationAction) -> String? {
         if
             let url = navigationAction.request.url,
-            let urlComponents = URLComponents(string: url.absoluteString), //получать значения компонентов из URL
+            let urlComponents = URLComponents(string: url.absoluteString),
             urlComponents.path == "/oauth/authorize/native",
             let items = urlComponents.queryItems,
             let codeItem = items.first(where: {$0.name == "code"})

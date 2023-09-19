@@ -110,7 +110,7 @@ extension URLSession {
                let statusCode = (response as? HTTPURLResponse)?.statusCode
             {
                 if 200..<300 ~= statusCode {
-                    fullFillCompletion(.success(data)) //Обработка успешного ответа
+                    fullFillCompletion(.success(data))
                 } else {
                     fullFillCompletion(.failure(NetworkError.httpStatusCode(statusCode))) //ошибки уровня HTTP ([HTTP 400/401/404], [HTTP 500], и тд])
                 }
