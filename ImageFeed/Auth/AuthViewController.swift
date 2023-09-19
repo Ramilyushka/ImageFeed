@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import WebKit
 
 class AuthViewController: UIViewController {
     let ShowWebViewSegueIdentifier = "ShowWebView"
+    let oAuth2Service = OAuth2Service()
     
     override func viewDidLoad() {
     }
@@ -27,7 +29,16 @@ class AuthViewController: UIViewController {
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-       // <#code#>
+        oAuth2Service.fetchAuthToken(code: code){ result in
+            switch result {
+            case .success(_):
+                vc.dismiss(animated: true)
+                let imageListController = ImagesListViewController()
+                //let contr
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
