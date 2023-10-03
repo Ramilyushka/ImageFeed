@@ -118,8 +118,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func didTapLogoutButton(_ sender: Any) {
         
-        let userDefaults = UserDefaults.standard
-        userDefaults.removeObject(forKey: "token")
-        
+//        let userDefaults = UserDefaults.standard
+//        userDefaults.removeObject(forKey: "token")
     }
 }

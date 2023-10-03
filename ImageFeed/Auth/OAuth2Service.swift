@@ -9,8 +9,11 @@ import Foundation
 
 final class OAuth2Service {
     
-    static let shared = OAuth2Service()
+    //static let shared = OAuth2Service()
     private let urlSession = URLSession.shared
+    
+    private var currentTask: URLSessionTask?
+    private var lastCode: String?
     
     private (set) var authToken: String? {
         get { return OAuth2TokenStorage().token }
@@ -19,8 +22,16 @@ final class OAuth2Service {
     
     func fetchAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         
+        assert(Thread.isMainThread)
+        
+        if lastCode == code { return }
+        currentTask?.cancel()
+        lastCode = code
+        
         let request = authTokenRequest(code: code)
-        let task =  object(for: request) {[weak self] result in
+        
+        currentTask =  object(for: request) {[weak self] result in
+            self?.currentTask = nil
             guard let self = self else {return }
             switch result {
             case .success(let body):
@@ -28,10 +39,12 @@ final class OAuth2Service {
                 self.authToken = authToken
                 completion(.success(authToken))
             case .failure(let error):
+                self.lastCode = nil
                 completion(.failure(error))
             }
         }
-        task.resume()
+        //self.currentTask = task
+        //currentTask?.resume()
     }
 }
 
@@ -67,7 +80,9 @@ extension OAuth2Service {
         for request: URLRequest,
         completion: @escaping (Result<OAuthTokenResponseBody, Error>) -> Void
     ) -> URLSessionTask {
+        
         let decoder = JSONDecoder()
+        
         return urlSession.data(for: request) { (result: Result<Data, Error>) in
             let response = result.flatMap { data -> Result<OAuthTokenResponseBody, Error> in
                 Result { try decoder.decode(OAuthTokenResponseBody.self, from: data) }
@@ -99,9 +114,10 @@ extension URLSession {
         completion: @escaping (Result<Data, Error>) -> Void
     ) -> URLSessionTask {
         let fullFillCompletion: (Result<Data,Error>) -> Void = { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
+           DispatchQueue.main.async {
+               print("queue 🟢")
+               completion(result)
+           }
         }
         
         let task = dataTask(with: request) { data, response, error in

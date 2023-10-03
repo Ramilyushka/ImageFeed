@@ -86,8 +86,7 @@
 		A8A11A512A25026600A40217 /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
-				A8A11A522A25026600A40217 /* AppDelegate.swift */,
-				A8A11A542A25026600A40217 /* SceneDelegate.swift */,
+				A8C18A2A2ACC605D00C6CDCA /* Application */,
 				A8A9A36A2A7441EA00F39954 /* Constants.swift */,
 				A856F32A2ABA14CB004C97FA /* SplashView */,
 				A8A9A36D2A7458DE00F39954 /* Auth */,
@@ -119,6 +118,15 @@
 				A8B640232A5EFF2400218167 /* ProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		A8C18A2A2ACC605D00C6CDCA /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				A8A11A522A25026600A40217 /* AppDelegate.swift */,
+				A8A11A542A25026600A40217 /* SceneDelegate.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		A8EBC25A2A57444F0057ED6D /* Helpers */ = {
