@@ -11,9 +11,11 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet private weak var logoutButton: UIButton!
     @IBOutlet private weak var avatarImageView: UIImageView!
-    @IBOutlet private weak var descriptionLabel: UILabel!
-    @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var loginProfileLabel: UILabel!
+    @IBOutlet private weak var bioDescriptionLabel: UILabel!
+    @IBOutlet private weak var fullNameLabel: UILabel!
+    @IBOutlet private weak var loginNameLabel: UILabel!
+    
+    private let profileService = ProfileService.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +24,11 @@ class ProfileViewController: UIViewController {
         
         constructAvatarImageView()
         constructLogoutButton()
-        constructNameLabel()
-        constructLoginProfileLabel()
-        constructDescriptionLabel()
+        constructFullNameLabel()
+        constructLoginNameLabel()
+        constructBioDescriptionLabel()
+        
+        updateProfileDetails(profile: profileService.profile)
     }
     
     private func constructAvatarImageView() {
@@ -67,7 +71,7 @@ class ProfileViewController: UIViewController {
         self.logoutButton = button
     }
     
-    private func constructNameLabel() {
+    private func constructFullNameLabel() {
         let label = UILabel()
         label.text = "Екатерина Новикова"
         label.font = UIFont.boldSystemFont(ofSize: 23)
@@ -80,10 +84,10 @@ class ProfileViewController: UIViewController {
         label.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor).isActive = true
         label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
         
-        self.nameLabel = label
+        self.fullNameLabel = label
     }
     
-    private func constructLoginProfileLabel() {
+    private func constructLoginNameLabel() {
         let label = UILabel()
         label.text = "@ekaterina_nov"
         label.font = UIFont.systemFont(ofSize: 13)
@@ -92,14 +96,14 @@ class ProfileViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
         
-        label.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).isActive = true
-        label.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor).isActive = true
-        label.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 8).isActive = true
+        label.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor).isActive = true
+        label.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor).isActive = true
         
-        self.loginProfileLabel = label
+        self.loginNameLabel = label
     }
     
-    private func constructDescriptionLabel() {
+    private func constructBioDescriptionLabel() {
         
         let label = UILabel()
         label.text = "Hello, world!"
@@ -109,15 +113,21 @@ class ProfileViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
         
-        label.topAnchor.constraint(equalTo: loginProfileLabel.bottomAnchor, constant: 8).isActive = true
-        label.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor).isActive = true
-        label.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: loginNameLabel.bottomAnchor, constant: 8).isActive = true
+        label.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor).isActive = true
+        label.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor).isActive = true
         
-        self.descriptionLabel = label
+        self.bioDescriptionLabel = label
+    }
+    
+    private func updateProfileDetails(profile: Profile?) {
+        guard let profile = profile else { return }
+        fullNameLabel.text = profile.fullName
+        loginNameLabel.text = profile.loginName
+        bioDescriptionLabel.text = profile.bio
     }
     
     @IBAction func didTapLogoutButton(_ sender: Any) {
-        
 //        let userDefaults = UserDefaults.standard
 //        userDefaults.removeObject(forKey: "token")
     }

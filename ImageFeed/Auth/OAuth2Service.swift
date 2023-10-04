@@ -32,7 +32,9 @@ final class OAuth2Service {
         
         currentTask =  object(for: request) {[weak self] result in
             self?.currentTask = nil
+           
             guard let self = self else {return }
+            
             switch result {
             case .success(let body):
                 let authToken = body.accessToken
@@ -43,8 +45,6 @@ final class OAuth2Service {
                 completion(.failure(error))
             }
         }
-        //self.currentTask = task
-        //currentTask?.resume()
     }
 }
 
@@ -94,7 +94,7 @@ extension OAuth2Service {
 
 // MARK: - HTTP Request
 extension URLRequest {
-    static func makeHTTPRequest(path: String, httpMethod: String, baseUrl: URL = Constants.defaultBaseURL) -> URLRequest {
+    static func makeHTTPRequest(path: String, httpMethod: String, baseUrl: URL = Constants.defaultApiBaseURL) -> URLRequest {
         var request = URLRequest(url: URL(string: path, relativeTo: baseUrl)!)
         request.httpMethod = httpMethod
         return request
@@ -115,7 +115,6 @@ extension URLSession {
     ) -> URLSessionTask {
         let fullFillCompletion: (Result<Data,Error>) -> Void = { result in
            DispatchQueue.main.async {
-               print("queue 🟢")
                completion(result)
            }
         }
