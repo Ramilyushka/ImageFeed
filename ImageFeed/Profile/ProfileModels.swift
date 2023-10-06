@@ -35,16 +35,16 @@ struct ProfileResult: Codable {
     }
 }
 
-struct ProfileImage: Codable{
+struct ProfileImageURL: Codable {
     let small: String
     let medium: String
     let large: String
 }
 
-struct UserResult: Codable {
-    let profileImage: ProfileImage
+struct ProfileImageResult: Codable {
+    let profileImageURL: ProfileImageURL
     
     private enum CodingKeys: String, CodingKey {
-        case profileImage = "profile_image"
+        case profileImageURL = "profile_image"
     }
 }

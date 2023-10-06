@@ -10,6 +10,7 @@ import Foundation
 final class ProfileImageService {
     
     static let shared = ProfileImageService()
+    static let DidChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     
     private let urlSession = URLSession.shared
     
@@ -33,18 +34,23 @@ final class ProfileImageService {
         var request = profileImageRequest(username: username)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
-        currentTask = urlSession.object(for: request) {[weak self] (result: Result<UserResult, Error>)  in
+        currentTask = urlSession.object(for: request) {[weak self] (result: Result<ProfileImageResult, Error>)  in
             
             self?.currentTask = nil
             
             guard let self = self else  {return }
             
             switch result {
-            case .success(let userResult):
+            case .success(let profileImage):
                 
-                let avatarURL = userResult.profileImage.small
+                let avatarURL = profileImage.profileImageURL.small
                 self.avatarURL = avatarURL
-                completion(.success(""))
+                completion(.success(avatarURL))
+                
+                NotificationCenter.default.post(
+                    name: ProfileImageService.DidChangeNotification,
+                    object: self,
+                    userInfo: ["URL": avatarURL])
                 
             case .failure(let error):
                 completion(.failure(error))

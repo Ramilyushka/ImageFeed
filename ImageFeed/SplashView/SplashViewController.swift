@@ -19,7 +19,11 @@ class SplashViewController: UIViewController {
     private let profileService = ProfileInfoService.shared
     private let profileImageService = ProfileImageService.shared
     
+    private var alertPresenter: AlertPresenter?
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
+        alertPresenter = AlertPresenter()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,6 +46,18 @@ class SplashViewController: UIViewController {
             .instantiateViewController(withIdentifier: "TabBarViewController")
            
         window.rootViewController = tabBarController
+    }
+    
+    private func showNetworkError() {
+            let alertModel = AlertModel(
+                title: "Что-то пошло не так(",
+                message: "Не удалось войти в систему",
+                buttonText: "Ок",
+                completion: { _ in
+                    exit(0)
+                })
+            
+        self.alertPresenter?.showAlert(alertModel: alertModel)
     }
 }
 
@@ -79,9 +95,10 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success(let token):
                 self.fetchProfile(token: token)
             case .failure:
-                UIBlockingProgressHUD.dismiss()
+                self.showNetworkError()
                 break
             }
+            UIBlockingProgressHUD.dismiss()
         }
     }
     
@@ -92,6 +109,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success(let profile):
                 self.fetchProfileImage(username: profile.userName, token: token)
             case .failure:
+                self.showNetworkError()
                 UIBlockingProgressHUD.dismiss()
                 break
             }
@@ -105,6 +123,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success:
                 self.switchToTabBarController()
             case .failure:
+                self.showNetworkError()
                 break
             }
             UIBlockingProgressHUD.dismiss()
