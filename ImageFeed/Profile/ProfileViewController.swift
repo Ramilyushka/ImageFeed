@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet private weak var fullNameLabel: UILabel!
     @IBOutlet private weak var loginNameLabel: UILabel!
     
-    private let profileService = ProfileService.shared
+    private let profileService = ProfileInfoService.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
