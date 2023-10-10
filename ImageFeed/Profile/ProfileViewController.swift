@@ -152,7 +152,6 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func didTapLogoutButton(_ sender: Any) {
-//        let userDefaults = UserDefaults.standard
-//        userDefaults.removeObject(forKey: "token")
+        OAuth2TokenStorage().removeToken()
     }
 }
