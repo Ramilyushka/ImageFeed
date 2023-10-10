@@ -16,7 +16,7 @@ final class ProfileImageService {
     
     private var currentTask: URLSessionTask?
     
-    private (set) var avatarURL: String?
+    private (set) var avatarImageURL: String?
     
     private func profileImageRequest(username: String) -> URLRequest {
         URLRequest.makeHTTPRequest(
@@ -27,9 +27,9 @@ final class ProfileImageService {
     
     func fetchProfileImageURL(username: String, token: String, completion: @escaping (Result<String, Error>) -> Void) {
         
-        guard avatarURL == nil else { return }
+        guard avatarImageURL == nil else { return }
         
-        currentTask?.cancel() //отменяем первую таску, если был повторный вызов
+        currentTask?.cancel()
         
         var request = profileImageRequest(username: username)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -43,8 +43,8 @@ final class ProfileImageService {
             switch result {
             case .success(let profileImage):
                 
-                let avatarURL = profileImage.profileImageURL.small
-                self.avatarURL = avatarURL
+                let avatarURL = profileImage.profileImageURL.medium
+                self.avatarImageURL = avatarURL
                 completion(.success(avatarURL))
                 
                 NotificationCenter.default.post(

@@ -6,53 +6,18 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProfileViewController: UIViewController {
+    
+    private let profileService = ProfileInfoService.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
     
     @IBOutlet private weak var logoutButton: UIButton!
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var bioDescriptionLabel: UILabel!
     @IBOutlet private weak var fullNameLabel: UILabel!
     @IBOutlet private weak var loginNameLabel: UILabel!
-    
-    private let profileService = ProfileInfoService.shared
-    
-    override init(nibName: String?, bundle: Bundle?) {
-        super.init(nibName: nibName, bundle: bundle)
-        addObserver()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        addObserver()
-    }
-    
-    deinit {
-        removeObserver()
-    }
-    
-    private func addObserver(){
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(updateAvatar(notification:)),
-            name: ProfileImageService.DidChangeNotification,
-            object: nil)
-    }
-    private func removeObserver() {
-        NotificationCenter.default.removeObserver(
-            self,
-            name: ProfileImageService.DidChangeNotification,
-            object: nil)
-    }
-    @objc
-    private func updateAvatar(notification: Notification) {
-        guard
-            isViewLoaded,
-            let userInfo = notification.userInfo,
-            let avatarImageURL = userInfo["URL"] as? String,
-            let _ = URL(string: avatarImageURL)
-        else { return }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,15 +32,39 @@ class ProfileViewController: UIViewController {
         
         updateProfileDetails(profile: profileService.profile)
         
-        if let avatarImageURL = ProfileImageService.shared.avatarURL,
-           let url = URL(string: avatarImageURL) {
-            
-        }
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(
+                forName: ProfileImageService.DidChangeNotification,
+                object: nil,
+                queue: .main) { [weak self] _ in
+                    guard let self = self else { return }
+                    self.updateAvatar()
+                }
+         updateAvatar()
+    }
+    
+    private func updateProfileDetails(profile: Profile?) {
+        guard let profile = profile else { return }
+        fullNameLabel.text = profile.fullName
+        loginNameLabel.text = profile.loginName
+        bioDescriptionLabel.text = profile.bio
+    }
+    
+    private func updateAvatar() {
+        guard
+            let avatarImageURL = ProfileImageService.shared.avatarImageURL,
+            let url = URL(string: avatarImageURL)
+        else { return }
+        
+        avatarImageView.kf.indicatorType = .activity
+        avatarImageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "stub"))
     }
     
     private func constructAvatarImageView() {
         
-        let image = UIImage(named: "photo") ?? UIImage()
+        let image = UIImage(named: "stub") ?? UIImage()
         
         let imageView = UIImageView(image: image)
         imageView.layer.masksToBounds = true
@@ -90,7 +79,7 @@ class ProfileViewController: UIViewController {
         imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
         imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
         
-        self.avatarImageView = imageView
+        avatarImageView = imageView
     }
     
     private func constructLogoutButton() {
@@ -160,13 +149,6 @@ class ProfileViewController: UIViewController {
         label.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor).isActive = true
         
         self.bioDescriptionLabel = label
-    }
-    
-    private func updateProfileDetails(profile: Profile?) {
-        guard let profile = profile else { return }
-        fullNameLabel.text = profile.fullName
-        loginNameLabel.text = profile.loginName
-        bioDescriptionLabel.text = profile.bio
     }
     
     @IBAction func didTapLogoutButton(_ sender: Any) {

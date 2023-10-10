@@ -49,15 +49,14 @@ class SplashViewController: UIViewController {
     }
     
     private func showNetworkError() {
-            let alertModel = AlertModel(
-                title: "Что-то пошло не так(",
-                message: "Не удалось войти в систему",
-                buttonText: "Ок",
-                completion: { _ in
-                    exit(0)
-                })
-            
-        self.alertPresenter?.showAlert(alertModel: alertModel)
+        let alertModel = AlertModel(
+            title: "Что-то пошло не так(",
+            message: "Не удалось войти в систему",
+            buttonText: "Ок",
+            completion: { _ in
+                exit(0)
+            })
+        alertPresenter?.showAlert(alertModel: alertModel)
     }
 }
 
@@ -96,7 +95,6 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.fetchProfile(token: token)
             case .failure:
                 self.showNetworkError()
-                break
             }
             UIBlockingProgressHUD.dismiss()
         }
@@ -111,7 +109,6 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .failure:
                 self.showNetworkError()
                 UIBlockingProgressHUD.dismiss()
-                break
             }
         }
     }
@@ -124,7 +121,6 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.switchToTabBarController()
             case .failure:
                 self.showNetworkError()
-                break
             }
             UIBlockingProgressHUD.dismiss()
         }
