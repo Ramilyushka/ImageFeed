@@ -125,12 +125,12 @@ extension SplashViewController {
     
     private func createSplashImageView() {
         
-        view.backgroundColor = .ypGray
+        view.backgroundColor = .ypBlack
         
         let image = UIImage(named: "launch_screen") ?? UIImage()
         
         let imageView = UIImageView(image: image)
-        imageView.backgroundColor = .ypGray
+        imageView.backgroundColor = .ypBlack
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
