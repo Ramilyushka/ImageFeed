@@ -21,9 +21,12 @@ class SplashViewController: UIViewController {
     
     private var alertPresenter: AlertPresenter?
     
+    @IBOutlet private weak var splashImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         alertPresenter = AlertPresenter()
+        //createAvatarImageView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -35,6 +38,12 @@ class SplashViewController: UIViewController {
         if let token = oAuth2TokenStorage.token {
             fetchProfile(token: token)
         } else {
+            
+//            let authViewController = UIStoryboard(name: "Main", bundle: .main)
+//                .instantiateViewController(withIdentifier: "TabBarViewController") as! AuthViewController
+//            authViewController.delegate = self
+//            authViewController.modalPresentationStyle = .fullScreen
+//            present(authViewController, animated: true, completion: nil)
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
         }
     }
@@ -78,6 +87,7 @@ extension SplashViewController {
 }
 
 extension SplashViewController: AuthViewControllerDelegate {
+    
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
         dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
@@ -124,5 +134,26 @@ extension SplashViewController: AuthViewControllerDelegate {
             }
             UIBlockingProgressHUD.dismiss()
         }
+    }
+}
+
+extension SplashViewController {
+    
+    private func createAvatarImageView() {
+        
+        let image = UIImage(named: "launch_screen") ?? UIImage()
+        
+        let imageView = UIImageView(image: image)
+        imageView.backgroundColor = .ypBlack
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(imageView)
+        
+        imageView.heightAnchor.constraint(equalToConstant: 77).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        
+        splashImageView = imageView
     }
 }

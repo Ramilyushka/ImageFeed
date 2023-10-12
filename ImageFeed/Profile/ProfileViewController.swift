@@ -22,13 +22,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .ypBlack
-        
-        constructAvatarImageView()
-        constructLogoutButton()
-        constructFullNameLabel()
-        constructLoginNameLabel()
-        constructBioDescriptionLabel()
+        createView()
         
         updateProfileDetails(profile: profileService.profile)
         
@@ -62,7 +56,25 @@ class ProfileViewController: UIViewController {
             placeholder: UIImage(named: "stub"))
     }
     
-    private func constructAvatarImageView() {
+    @IBAction func didTapLogoutButton(_ sender: Any) {
+        OAuth2TokenStorage().removeToken()
+    }
+}
+
+extension ProfileViewController {
+    
+    private func createView(){
+        
+        view.backgroundColor = .ypBlack
+        
+        createAvatarImageView()
+        createLogoutButton()
+        createFullNameLabel()
+        createLoginNameLabel()
+        createBioDescriptionLabel()
+    }
+    
+    private func createAvatarImageView() {
         
         let image = UIImage(named: "stub") ?? UIImage()
         
@@ -82,7 +94,7 @@ class ProfileViewController: UIViewController {
         avatarImageView = imageView
     }
     
-    private func constructLogoutButton() {
+    private func createLogoutButton() {
         
         let button = UIButton.systemButton(
             with: UIImage(named: "logout") ?? UIImage(),
@@ -102,7 +114,7 @@ class ProfileViewController: UIViewController {
         self.logoutButton = button
     }
     
-    private func constructFullNameLabel() {
+    private func createFullNameLabel() {
         let label = UILabel()
         label.text = "Екатерина Новикова"
         label.font = UIFont.boldSystemFont(ofSize: 23)
@@ -118,7 +130,7 @@ class ProfileViewController: UIViewController {
         self.fullNameLabel = label
     }
     
-    private func constructLoginNameLabel() {
+    private func createLoginNameLabel() {
         let label = UILabel()
         label.text = "@ekaterina_nov"
         label.font = UIFont.systemFont(ofSize: 13)
@@ -134,7 +146,7 @@ class ProfileViewController: UIViewController {
         self.loginNameLabel = label
     }
     
-    private func constructBioDescriptionLabel() {
+    private func createBioDescriptionLabel() {
         
         let label = UILabel()
         label.text = "Hello, world!"
@@ -149,9 +161,5 @@ class ProfileViewController: UIViewController {
         label.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor).isActive = true
         
         self.bioDescriptionLabel = label
-    }
-    
-    @IBAction func didTapLogoutButton(_ sender: Any) {
-        OAuth2TokenStorage().removeToken()
     }
 }
