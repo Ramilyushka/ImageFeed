@@ -26,25 +26,26 @@ class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         alertPresenter = AlertPresenter()
-        //createAvatarImageView()
+        
+        createSplashImageView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        isAuth()
+        checkAuthStatus()
     }
 
-    private func isAuth(){
+    private func checkAuthStatus(){
         if let token = oAuth2TokenStorage.token {
+            UIBlockingProgressHUD.show()
             fetchProfile(token: token)
         } else {
-            
-//            let authViewController = UIStoryboard(name: "Main", bundle: .main)
-//                .instantiateViewController(withIdentifier: "TabBarViewController") as! AuthViewController
-//            authViewController.delegate = self
-//            authViewController.modalPresentationStyle = .fullScreen
-//            present(authViewController, animated: true, completion: nil)
-            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
+            let authViewController = UIStoryboard(name: "Main", bundle: .main)
+                .instantiateViewController(withIdentifier: "AuthViewController")
+            guard let authViewController = authViewController as? AuthViewController else { return }
+            authViewController.delegate = self
+            authViewController.modalPresentationStyle = .fullScreen
+            present(authViewController, animated: true, completion: nil)
         }
     }
     
@@ -63,40 +64,23 @@ class SplashViewController: UIViewController {
             message: "Не удалось войти в систему",
             buttonText: "Ок",
             completion: { _ in
+                OAuth2TokenStorage().removeToken()
                 exit(0)
             })
         alertPresenter?.showAlert(alertModel: alertModel)
     }
 }
 
-extension SplashViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showAuthenticationScreenSegueIdentifier {
-            
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let authViewController = navigationController.viewControllers[0] as? AuthViewController
-            else { fatalError("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)") }
-            
-            authViewController.delegate = self
-            
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
-    }
-}
-
 extension SplashViewController: AuthViewControllerDelegate {
     
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
+        UIBlockingProgressHUD.show()
         dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
             self.fetchOAuthToken(code: code)
         }
     }
     private func fetchOAuthToken(code: String) {
-        
-        UIBlockingProgressHUD.show()
         
         oAuth2Service.fetchAuthToken(code: code) { [weak self] result in
             guard let self = self else { return }
@@ -105,8 +89,8 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.fetchProfile(token: token)
             case .failure:
                 self.showNetworkError()
+                UIBlockingProgressHUD.dismiss()
             }
-            UIBlockingProgressHUD.dismiss()
         }
     }
     
@@ -117,8 +101,8 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success(let profile):
                 self.fetchProfileImage(username: profile.userName, token: token)
             case .failure:
-                self.showNetworkError()
                 UIBlockingProgressHUD.dismiss()
+                self.showNetworkError()
             }
         }
     }
@@ -139,12 +123,14 @@ extension SplashViewController: AuthViewControllerDelegate {
 
 extension SplashViewController {
     
-    private func createAvatarImageView() {
+    private func createSplashImageView() {
+        
+        view.backgroundColor = .ypGray
         
         let image = UIImage(named: "launch_screen") ?? UIImage()
         
         let imageView = UIImageView(image: image)
-        imageView.backgroundColor = .ypBlack
+        imageView.backgroundColor = .ypGray
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
@@ -152,7 +138,7 @@ extension SplashViewController {
         imageView.heightAnchor.constraint(equalToConstant: 77).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 75).isActive = true
         imageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        imageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
         
         splashImageView = imageView
     }

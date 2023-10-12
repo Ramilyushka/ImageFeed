@@ -29,7 +29,9 @@ final class OAuth2Service {
         
         let request = authTokenRequest(code: code)
         
-        currentTask = urlSession.object(for: request) {[weak self] (result: Result<OAuthTokenResponseBody, Error>)  in
+        currentTask = urlSession.object(for: request) {
+            [weak self] (result: Result<OAuthTokenResponseBody, Error>)  in
+            
             self?.currentTask = nil
            
             guard let self = self else {return }
