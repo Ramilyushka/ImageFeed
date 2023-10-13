@@ -16,16 +16,16 @@ class SplashViewController: UIViewController {
     private let oAuth2Service = OAuth2Service.shared
     private let oAuth2TokenStorage = OAuth2TokenStorage()
     
-    private let profileService = ProfileInfoService.shared
+    private let profileInfoService = ProfileInfoService.shared
     private let profileImageService = ProfileImageService.shared
     
-    private var alertPresenter: AlertPresenter?
+    private var alertPresenter = AlertPresenter()
     
     @IBOutlet private weak var splashImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        alertPresenter = AlertPresenter()
+        alertPresenter.delegate = self
         
         createSplashImageView()
     }
@@ -40,13 +40,17 @@ class SplashViewController: UIViewController {
             UIBlockingProgressHUD.show()
             fetchProfile(token: token)
         } else {
-            let authViewController = UIStoryboard(name: "Main", bundle: .main)
-                .instantiateViewController(withIdentifier: "AuthViewController")
-            guard let authViewController = authViewController as? AuthViewController else { return }
-            authViewController.delegate = self
-            authViewController.modalPresentationStyle = .fullScreen
-            present(authViewController, animated: true, completion: nil)
+            showAuthViewController()
         }
+    }
+    
+    private func showAuthViewController(){
+        let authViewController = UIStoryboard(name: "Main", bundle: .main)
+            .instantiateViewController(withIdentifier: "AuthViewController")
+        guard let authViewController = authViewController as? AuthViewController else { return }
+        authViewController.delegate = self
+        authViewController.modalPresentationStyle = .fullScreen
+        present(authViewController, animated: true, completion: nil)
     }
     
     private func switchToTabBarController() {
@@ -64,10 +68,10 @@ class SplashViewController: UIViewController {
             message: "Не удалось войти в систему",
             buttonText: "Ок",
             completion: { _ in
-                OAuth2TokenStorage().removeToken()
-                exit(0)
+                let _ = OAuth2TokenStorage().removeToken()
+                self.showAuthViewController()
             })
-        alertPresenter?.showAlert(alertModel: alertModel)
+        alertPresenter.showAlert(alertModel: alertModel)
     }
 }
 
@@ -75,11 +79,10 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
         UIBlockingProgressHUD.show()
-        dismiss(animated: true) { [weak self] in
-            guard let self = self else { return }
-            self.fetchOAuthToken(code: code)
-        }
+        fetchOAuthToken(code: code)
+        alertPresenter.delegate = vc
     }
+    
     private func fetchOAuthToken(code: String) {
         
         oAuth2Service.fetchAuthToken(code: code) { [weak self] result in
@@ -88,14 +91,14 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success(let token):
                 self.fetchProfile(token: token)
             case .failure:
-                self.showNetworkError()
                 UIBlockingProgressHUD.dismiss()
+                self.showNetworkError()
             }
         }
     }
     
     private func fetchProfile(token: String) {
-        profileService.fetchProfile(token) { [weak self] result in
+        profileInfoService.fetchProfile(token) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let profile):

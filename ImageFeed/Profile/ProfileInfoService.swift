@@ -26,8 +26,7 @@ final class ProfileInfoService {
     
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         
-        guard profile == nil else { return }
-        
+        assert(Thread.isMainThread)
         currentTask?.cancel() //отменяем первую таску, если был повторный вызов
         
         var request = profileRequest()

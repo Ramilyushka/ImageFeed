@@ -17,6 +17,8 @@ struct AlertModel {
 
 class AlertPresenter {
     
+    weak var delegate: UIViewController?
+    
     func showAlert(alertModel: AlertModel) {
         
         let alert = UIAlertController(title: alertModel.title, message: alertModel.message, preferredStyle: .alert)
@@ -25,11 +27,6 @@ class AlertPresenter {
         let action = UIAlertAction(title: alertModel.buttonText, style: .default, handler: alertModel.completion)
         alert.addAction(action)
         
-        if var topController = UIApplication.shared.windows[0].rootViewController {
-            while let presentedViewController = topController.presentedViewController {
-                topController = presentedViewController
-            }
-            topController.present(alert, animated: true)
-        }
+        delegate?.present(alert, animated: true)
     }
 }

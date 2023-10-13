@@ -10,7 +10,7 @@ import Foundation
 final class ProfileImageService {
     
     static let shared = ProfileImageService()
-    static let DidChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
+    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     
     private let urlSession = URLSession.shared
     
@@ -27,8 +27,7 @@ final class ProfileImageService {
     
     func fetchProfileImageURL(username: String, token: String, completion: @escaping (Result<String, Error>) -> Void) {
         
-        guard avatarImageURL == nil else { return }
-        
+        assert(Thread.isMainThread)
         currentTask?.cancel()
         
         var request = profileImageRequest(username: username)
@@ -48,7 +47,7 @@ final class ProfileImageService {
                 completion(.success(avatarURL))
                 
                 NotificationCenter.default.post(
-                    name: ProfileImageService.DidChangeNotification,
+                    name: ProfileImageService.didChangeNotification,
                     object: self,
                     userInfo: ["URL": avatarURL])
                 

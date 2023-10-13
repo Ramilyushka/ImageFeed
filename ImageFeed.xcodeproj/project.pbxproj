@@ -107,7 +107,6 @@
 			children = (
 				A8A11A522A25026600A40217 /* AppDelegate.swift */,
 				A8A11A542A25026600A40217 /* SceneDelegate.swift */,
-				A8C18A2A2ACC605D00C6CDCA /* Application */,
 				A8A9A36A2A7441EA00F39954 /* Constants.swift */,
 				A866DEBA2AD0A19B0043BAAE /* AlertPresenter.swift */,
 				A866DEB72AD078C60043BAAE /* NetworkService.swift */,
@@ -145,13 +144,6 @@
 				A866DEB32ACDCFEB0043BAAE /* ProfileImageService.swift */,
 			);
 			path = Profile;
-			sourceTree = "<group>";
-		};
-		A8C18A2A2ACC605D00C6CDCA /* Application */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Application;
 			sourceTree = "<group>";
 		};
 		A8EBC25A2A57444F0057ED6D /* Helpers */ = {

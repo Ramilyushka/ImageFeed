@@ -43,6 +43,7 @@ final class OAuth2Service {
                 completion(.success(authToken))
             case .failure(let error):
                 completion(.failure(error))
+                self.lastCode = nil
             }
         }
     }

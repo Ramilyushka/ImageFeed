@@ -28,7 +28,7 @@ class ProfileViewController: UIViewController {
         
         profileImageServiceObserver = NotificationCenter.default
             .addObserver(
-                forName: ProfileImageService.DidChangeNotification,
+                forName: ProfileImageService.didChangeNotification,
                 object: nil,
                 queue: .main) { [weak self] _ in
                     guard let self = self else { return }
@@ -57,7 +57,8 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func didTapLogoutButton(_ sender: Any) {
-        OAuth2TokenStorage().removeToken()
+        let isTokenRemoved  = OAuth2TokenStorage().removeToken()
+        print("Was the token removed? \(isTokenRemoved)")
     }
 }
 
