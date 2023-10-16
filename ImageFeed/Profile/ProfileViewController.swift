@@ -6,30 +6,78 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProfileViewController: UIViewController {
     
+    private let profileService = ProfileInfoService.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
+    
     @IBOutlet private weak var logoutButton: UIButton!
     @IBOutlet private weak var avatarImageView: UIImageView!
-    @IBOutlet private weak var descriptionLabel: UILabel!
-    @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var loginProfileLabel: UILabel!
+    @IBOutlet private weak var bioDescriptionLabel: UILabel!
+    @IBOutlet private weak var fullNameLabel: UILabel!
+    @IBOutlet private weak var loginNameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .ypBlack
+        createView()
         
-        constructAvatarImageView()
-        constructLogoutButton()
-        constructNameLabel()
-        constructLoginProfileLabel()
-        constructDescriptionLabel()
+        updateProfileDetails(profile: profileService.profile)
+        
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(
+                forName: ProfileImageService.didChangeNotification,
+                object: nil,
+                queue: .main) { [weak self] _ in
+                    guard let self = self else { return }
+                    self.updateAvatar()
+                }
+         updateAvatar()
     }
     
-    private func constructAvatarImageView() {
+    private func updateProfileDetails(profile: Profile?) {
+        guard let profile = profile else { return }
+        fullNameLabel.text = profile.fullName
+        loginNameLabel.text = profile.loginName
+        bioDescriptionLabel.text = profile.bio
+    }
+    
+    private func updateAvatar() {
+        guard
+            let avatarImageURL = ProfileImageService.shared.avatarImageURL,
+            let url = URL(string: avatarImageURL)
+        else { return }
         
-        let image = UIImage(named: "photo") ?? UIImage()
+        avatarImageView.kf.indicatorType = .activity
+        avatarImageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "stub"))
+    }
+    
+    @IBAction func didTapLogoutButton(_ sender: Any) {
+        let isTokenRemoved  = OAuth2TokenStorage().removeToken()
+        print("Was the token removed? \(isTokenRemoved)")
+    }
+}
+
+extension ProfileViewController {
+    
+    private func createView(){
+        
+        view.backgroundColor = .ypBlack
+        
+        createAvatarImageView()
+        createLogoutButton()
+        createFullNameLabel()
+        createLoginNameLabel()
+        createBioDescriptionLabel()
+    }
+    
+    private func createAvatarImageView() {
+        
+        let image = UIImage(named: "stub") ?? UIImage()
         
         let imageView = UIImageView(image: image)
         imageView.layer.masksToBounds = true
@@ -44,10 +92,10 @@ class ProfileViewController: UIViewController {
         imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
         imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
         
-        self.avatarImageView = imageView
+        avatarImageView = imageView
     }
     
-    private func constructLogoutButton() {
+    private func createLogoutButton() {
         
         let button = UIButton.systemButton(
             with: UIImage(named: "logout") ?? UIImage(),
@@ -67,7 +115,7 @@ class ProfileViewController: UIViewController {
         self.logoutButton = button
     }
     
-    private func constructNameLabel() {
+    private func createFullNameLabel() {
         let label = UILabel()
         label.text = "Екатерина Новикова"
         label.font = UIFont.boldSystemFont(ofSize: 23)
@@ -80,10 +128,10 @@ class ProfileViewController: UIViewController {
         label.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor).isActive = true
         label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
         
-        self.nameLabel = label
+        self.fullNameLabel = label
     }
     
-    private func constructLoginProfileLabel() {
+    private func createLoginNameLabel() {
         let label = UILabel()
         label.text = "@ekaterina_nov"
         label.font = UIFont.systemFont(ofSize: 13)
@@ -92,14 +140,14 @@ class ProfileViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
         
-        label.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).isActive = true
-        label.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor).isActive = true
-        label.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 8).isActive = true
+        label.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor).isActive = true
+        label.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor).isActive = true
         
-        self.loginProfileLabel = label
+        self.loginNameLabel = label
     }
     
-    private func constructDescriptionLabel() {
+    private func createBioDescriptionLabel() {
         
         let label = UILabel()
         label.text = "Hello, world!"
@@ -109,14 +157,10 @@ class ProfileViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
         
-        label.topAnchor.constraint(equalTo: loginProfileLabel.bottomAnchor, constant: 8).isActive = true
-        label.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor).isActive = true
-        label.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: loginNameLabel.bottomAnchor, constant: 8).isActive = true
+        label.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor).isActive = true
+        label.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor).isActive = true
         
-        self.descriptionLabel = label
-    }
-    
-    @IBAction func didTapLogoutButton(_ sender: Any) {
-        //code
+        self.bioDescriptionLabel = label
     }
 }
