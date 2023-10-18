@@ -116,7 +116,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             guard let self = self else { return }
             switch result {
             case .success:
-                self.fetchPhoto(token: token)
+                //self.fetchPhoto(token: token)
                 self.switchToTabBarController()
             case .failure:
                 self.showNetworkError()
@@ -125,18 +125,18 @@ extension SplashViewController: AuthViewControllerDelegate {
         }
     }
     
-    private func fetchPhoto(token: String) {
-        imagesListService.fetchPhotosNextPage(token) { result in
-           // guard let self = self else { return }
-            switch result {
-            case .success:
-                print("-----PHOTOS SPLASH-----")
-                print(result)
-            case .failure:
-                self.showNetworkError()
-            }
-        }
-    }
+//    private func fetchPhoto(token: String) {
+//        imagesListService.fetchPhotosNextPage(token) { result in
+//           // guard let self = self else { return }
+//            switch result {
+//            case .success:
+//                print("-----PHOTOS SPLASH-----")
+//                print(result)
+//            case .failure:
+//                self.showNetworkError()
+//            }
+//        }
+//    }
 }
 
 extension SplashViewController {

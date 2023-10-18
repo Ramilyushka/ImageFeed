@@ -10,60 +10,72 @@ import Foundation
 final class ImagesListService {
     
     static let shared = ImagesListService()
-   // static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
+    static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     
     private let urlSession = URLSession.shared
     
     private var currentTask: URLSessionTask?
     
     private (set) var photos: [Photo] = []
-    private var lasLoadedPage = 1
+    private var lastLoadedPage = 1
+//    private var currentLoadingPage = 1
     
-    private func photoRequest() -> URLRequest {
+    private func photoRequest(page: Int) -> URLRequest {
         URLRequest.makeHTTPRequest(
-            path: "/photos?page=\(lasLoadedPage)&per_page=10",
+            path: "/photos?page=\(page)&per_page=10",
             httpMethod: "GET",
             baseUrl:  Constants.defaultApiBaseURL)
     }
     
-    func fetchPhotosNextPage(_ token: String, completion: @escaping (Result<[Photo], Error>) -> Void) {
+    func fetchPhotosNextPage() {
         assert(Thread.isMainThread)
         currentTask?.cancel()
         
-        var request = photoRequest()
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+//        if currentLoadingPage == lastLoadedPage {
+//            currentLoadingPage += 1
+//        }
+       //if let nextPage = lastLoadedPage
+//        let nextPage = lastLoadedPage == nil
+//        ? 1
+//        : lastLoadedPage!. + 1
+        
+        var request = photoRequest(page: lastLoadedPage)
+        request.setValue("Bearer \(OAuth2TokenStorage.shared.token ?? "")", forHTTPHeaderField: "Authorization")
         print("----REQUEST PHOTOS ------")
         print(request)
         
         currentTask = urlSession.object(for: request) {[weak self] (result: Result<[PhotoResult], Error>)  in
             
-           // self?.currentTask = nil
+            self?.currentTask = nil
             
             guard let self = self else  {
                 print("GUARD ImagesListService")
                 return
             }
-            
+                
             switch result {
             case .success(let photoResultArrray):
-//                print("photoResultArrray")
-//                print(photoResultArrray)
+                self.lastLoadedPage += 1
+                print("---lastLoadedPage---- \(self.lastLoadedPage)")
                 
                 let photoResultArray = photoResultArrray
                 
-                for photoResult in photoResultArray {
-                    self.photos.append(Photo(result: photoResult))
-                }
-                lasLoadedPage += 1
-                completion(.success(self.photos))
+//                DispatchQueue.main.async {
+                    for photoResult in photoResultArray {
+                        self.photos.append(Photo(result: photoResult))
+                    }
+               // }
                 
-//                NotificationCenter.default.post(
-//                    name: ImagesListService.didChangeNotification,
-//                    object: self,
-//                    userInfo: ["photos": photos])
+                //completion(.success(self.photos))
+                
+                NotificationCenter.default.post(
+                    name: ImagesListService.didChangeNotification,
+                    object: self,
+                    userInfo: ["photos": self.photos])
                 
             case .failure(let error):
-                completion(.failure(error))
+                print(error)
+                //completion(.failure(error))
             }
         }
     }
