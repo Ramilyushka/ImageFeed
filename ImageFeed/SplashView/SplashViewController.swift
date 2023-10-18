@@ -18,6 +18,7 @@ class SplashViewController: UIViewController {
     
     private let profileInfoService = ProfileInfoService.shared
     private let profileImageService = ProfileImageService.shared
+    private let imagesListService = ImagesListService.shared
     
     private var alertPresenter = AlertPresenter()
     
@@ -115,11 +116,25 @@ extension SplashViewController: AuthViewControllerDelegate {
             guard let self = self else { return }
             switch result {
             case .success:
+                self.fetchPhoto(token: token)
                 self.switchToTabBarController()
             case .failure:
                 self.showNetworkError()
             }
             UIBlockingProgressHUD.dismiss()
+        }
+    }
+    
+    private func fetchPhoto(token: String) {
+        imagesListService.fetchPhotosNextPage(token) { result in
+           // guard let self = self else { return }
+            switch result {
+            case .success:
+                print("-----PHOTOS SPLASH-----")
+                print(result)
+            case .failure:
+                self.showNetworkError()
+            }
         }
     }
 }

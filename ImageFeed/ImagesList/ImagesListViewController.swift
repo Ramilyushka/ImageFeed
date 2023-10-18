@@ -8,6 +8,8 @@ class ImagesListViewController: UIViewController {
     
     private let photoNames: [String] = Array(0..<20).map{"\($0)"}
     
+    private var photos: [Photo] = []
+    
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -63,6 +65,13 @@ extension ImagesListViewController: UITableViewDataSource {
         configCell(for: imageListCell, with: indexPath)
         
         return imageListCell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == photos.count {
+            
+        }
+        else { return }
     }
 }
 
