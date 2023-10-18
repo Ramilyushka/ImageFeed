@@ -10,23 +10,23 @@ import Foundation
 final class ImagesListService {
     
     static let shared = ImagesListService()
-   // static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
+    static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     
     private let urlSession = URLSession.shared
     
     private var currentTask: URLSessionTask?
     
     private (set) var photos: [Photo] = []
-    private var lasLoadedPage = 1
+    private var lastLoadedPage = 1
     
     private func photoRequest() -> URLRequest {
         URLRequest.makeHTTPRequest(
-            path: "/photos?page=\(lasLoadedPage)&per_page=10",
+            path: "/photos?page=\(lastLoadedPage)&per_page=10",
             httpMethod: "GET",
             baseUrl:  Constants.defaultApiBaseURL)
     }
     
-    func fetchPhotosNextPage(_ token: String, completion: @escaping (Result<[Photo], Error>) -> Void) {
+    func fetchPhotosNextPage(_ token: String) {
         assert(Thread.isMainThread)
         currentTask?.cancel()
         
@@ -35,9 +35,11 @@ final class ImagesListService {
         print("----REQUEST PHOTOS ------")
         print(request)
         
+        print("---LAST PAGE----\(lastLoadedPage)")
+        
         currentTask = urlSession.object(for: request) {[weak self] (result: Result<[PhotoResult], Error>)  in
             
-           // self?.currentTask = nil
+            self?.currentTask = nil
             
             guard let self = self else  {
                 print("GUARD ImagesListService")
@@ -46,24 +48,24 @@ final class ImagesListService {
             
             switch result {
             case .success(let photoResultArrray):
-//                print("photoResultArrray")
-//                print(photoResultArrray)
                 
                 let photoResultArray = photoResultArrray
                 
                 for photoResult in photoResultArray {
-                    self.photos.append(Photo(result: photoResult))
+                    photos.append(Photo(result: photoResult))
                 }
-                lasLoadedPage += 1
-                completion(.success(self.photos))
+               // completion(.success(self.photos))
                 
-//                NotificationCenter.default.post(
-//                    name: ImagesListService.didChangeNotification,
-//                    object: self,
-//                    userInfo: ["photos": photos])
+                NotificationCenter.default.post(
+                    name: ImagesListService.didChangeNotification,
+                    object: self,
+                    userInfo: ["photos": photos])
+                
+                lastLoadedPage += 1
                 
             case .failure(let error):
-                completion(.failure(error))
+                print(error)
+               // completion(.failure(error))
             }
         }
     }
