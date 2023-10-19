@@ -39,6 +39,8 @@ class WebViewViewController: UIViewController {
         let request = URLRequest(url: url)
         webView.load(request)
         
+        print("---REQUEST WEB VIEW----- \(request)")
+        
         webView.navigationDelegate = self
         
         estimatedProgressObservation = webView.observe(
@@ -86,6 +88,7 @@ extension WebViewViewController: WKNavigationDelegate {
         {
             return codeItem.value
         } else {
+            print("---ERROR--- code")
             return nil
         }
     }

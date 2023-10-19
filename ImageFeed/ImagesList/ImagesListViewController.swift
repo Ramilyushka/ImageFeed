@@ -8,8 +8,8 @@ class ImagesListViewController: UIViewController {
     private let imagesListService = ImagesListService.shared
     
     @IBOutlet private var tableView: UITableView!
-    
-    private let photoNames: [String] = Array(0..<10).map{"\($0)"}
+//    
+//    private let photoNames: [String] = Array(0..<10).map{"\($0)"}
     
     private (set) var photos: [Photo] = []
     
@@ -69,6 +69,7 @@ extension ImagesListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
+        imageListCell.delegate = self
         configCell(for: imageListCell, with: indexPath)
         
         return imageListCell
@@ -92,13 +93,8 @@ extension ImagesListViewController: UITableViewDataSource {
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             })
         
-        cell.dateLabel.text = dateFormatter.string(from: photos[indexPath.row].createdAt ?? Date())
-        
-        if indexPath.row % 2 == 0 {
-            cell.likeButton.setImage(UIImage(named: "like_active"), for: .normal)
-        } else {
-            cell.likeButton.setImage(UIImage(named: "like_no_active"), for: .normal)
-        }
+        cell.dateLabel.text = dateFormatter.string(from: photos[indexPath.row].createdAt ?? Date()) + " row \(indexPath.row) "
+        cell.setIsLiked(isLike: photos[indexPath.row].isLiked)
     }
     
     //задать высоту ячейке
@@ -122,6 +118,27 @@ extension ImagesListViewController: UITableViewDataSource {
     }
 }
 
+extension ImagesListViewController: ImagesListCellDelegate {
+    func imageListCellDidTapLike(_ cell: ImagesListCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let photo = photos[indexPath.row]
+        print("PHOTO like \(photo.isLiked)")
+        UIBlockingProgressHUD.show()
+        imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { result in
+            switch result {
+            case .success():
+                self.photos = self.imagesListService.photos
+                cell.setIsLiked(isLike:  self.photos[indexPath.row].isLiked)
+                print("PHOTO change like \(self.photos[indexPath.row].isLiked)")
+                UIBlockingProgressHUD.dismiss()
+            case .failure(let error):
+                UIBlockingProgressHUD.dismiss()
+                print(error)
+            }
+        }
+    }
+}
+
 extension ImagesListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -132,8 +149,10 @@ extension ImagesListViewController: UITableViewDelegate {
         if segue.identifier == ShowSingleImageSegueIdentifier {
             let viewController = segue.destination as! SingleImageViewController
             let indexPath = sender as! IndexPath
-            let image = UIImage(named: photoNames[indexPath.row])
-            viewController.image = image
+            guard
+                let url = URL(string: photos[indexPath.row].largeImageURL)
+            else { return }
+            viewController.fullImageURL = url
         } else {
             super.prepare(for: segue, sender: sender)
         }

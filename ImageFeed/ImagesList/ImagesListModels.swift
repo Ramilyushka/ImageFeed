@@ -24,7 +24,11 @@ struct Photo {
     let welcomeDescription: String?
     let thumbImageURL: String
     let largeImageURL: String
-    let isLiked: Bool
+    var isLiked: Bool
+    
+    mutating func changeLike() {
+        isLiked.toggle()
+    }
 }
 
 extension Photo {
@@ -71,6 +75,6 @@ struct PhotoResult: Codable {
     }
 }
 
-struct PhotoResultArray: Codable {
-    let photoResultArray: [PhotoResult]
+struct OnePhoto: Codable {
+    let photo: PhotoResult
 }

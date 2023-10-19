@@ -57,7 +57,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func didTapLogoutButton(_ sender: Any) {
-        let isTokenRemoved  = OAuth2TokenStorage().removeToken()
+        let isTokenRemoved  = OAuth2TokenStorage.shared.removeToken()
         print("Was the token removed? \(isTokenRemoved)")
     }
 }

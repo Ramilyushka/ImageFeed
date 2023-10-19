@@ -93,8 +93,10 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success(let token):
                 self.fetchProfile(token: token)
                 self.imagesListService.fetchPhotosNextPage()
-            case .failure:
+            case .failure(let error):
                 UIBlockingProgressHUD.dismiss()
+                print("----ERROR fetchAuthToken----")
+                print(error)
                 self.showNetworkError()
             }
         }
@@ -106,8 +108,10 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let profile):
                 self.fetchProfileImage(username: profile.userName, token: token)
-            case .failure:
+            case .failure(let error):
                 UIBlockingProgressHUD.dismiss()
+                print("----ERROR fetchProfile----")
+                print(error)
                 self.showNetworkError()
             }
         }
@@ -119,7 +123,9 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success:
                 self.switchToTabBarController()
-            case .failure:
+            case .failure(let error):
+                print("----ERROR fetchProfileImageURL----")
+                print(error)
                 self.showNetworkError()
             }
             UIBlockingProgressHUD.dismiss()

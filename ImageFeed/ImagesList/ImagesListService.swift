@@ -14,32 +14,24 @@ final class ImagesListService {
     
     private let urlSession = URLSession.shared
     
-    private var currentTask: URLSessionTask?
+    private var taskNextPhoto: URLSessionTask?
+    private var taskChangeLike: URLSessionTask?
     
     private (set) var photos: [Photo] = []
-    private var lastLoadedPage = 1
-    
-    private func photoRequest() -> URLRequest {
-        URLRequest.makeHTTPRequest(
-            path: "/photos?page=\(lastLoadedPage)&per_page=10",
-            httpMethod: "GET",
-            baseUrl:  Constants.defaultApiBaseURL)
-    }
+    private var lastLoadedPage = 2
     
     func fetchPhotosNextPage() {
         assert(Thread.isMainThread)
-        currentTask?.cancel()
+        taskNextPhoto?.cancel()
         
         var request = photoRequest()
         request.setValue("Bearer \(OAuth2TokenStorage.shared.token ?? "")", forHTTPHeaderField: "Authorization")
         print("----REQUEST PHOTOS ------")
         print(request)
         
-        print("---LAST PAGE----\(lastLoadedPage)")
-        
-        currentTask = urlSession.object(for: request) {[weak self] (result: Result<[PhotoResult], Error>)  in
+        taskNextPhoto = urlSession.object(for: request) {[weak self] (result: Result<[PhotoResult], Error>) in
             
-            self?.currentTask = nil
+            self?.taskNextPhoto = nil
             
             guard let self = self else  {
                 print("GUARD ImagesListService")
@@ -66,5 +58,48 @@ final class ImagesListService {
                 print(error)
             }
         }
+    }
+    
+    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        assert(Thread.isMainThread)
+        taskChangeLike?.cancel()
+        
+        var request = likeRequest(photoId, isLike)
+        request.setValue("Bearer \(OAuth2TokenStorage.shared.token ?? "")", forHTTPHeaderField: "Authorization")
+        print("----REQUEST PHOTOS ------")
+        print(request)
+        
+        taskChangeLike = urlSession.object(for: request){(result: Result<OnePhoto, Error>) in
+            
+            self.taskChangeLike = nil
+            
+            switch result {
+            case .success(let onePhoto):
+                // Поиск индекса элемента
+                if let index = self.photos.firstIndex(where: { $0.id == onePhoto.photo.id }) {
+                    self.photos[index].changeLike()
+                }
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+}
+
+extension ImagesListService {
+    
+    private func photoRequest() -> URLRequest {
+        URLRequest.makeHTTPRequest(
+            path: "/photos?page=\(lastLoadedPage)&per_page=10",
+            httpMethod: "GET",
+            baseUrl:  Constants.defaultApiBaseURL)
+    }
+    
+    private func likeRequest(_ photoId: String, _ isLike: Bool) -> URLRequest {
+        URLRequest.makeHTTPRequest(
+            path: "/photos/\(photoId)/like",
+            httpMethod: isLike ? "DELETE" : "POST",
+            baseUrl:  Constants.defaultApiBaseURL)
     }
 }
