@@ -53,7 +53,7 @@ class ProfileViewController: UIViewController {
         avatarImageView.kf.indicatorType = .activity
         avatarImageView.kf.setImage(
             with: url,
-            placeholder: UIImage(named: "stub"))
+            placeholder: UIImage(named: "stub_profile"))
     }
     
     @IBAction func didTapLogoutButton(_ sender: Any) {

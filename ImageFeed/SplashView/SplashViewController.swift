@@ -40,6 +40,7 @@ class SplashViewController: UIViewController {
         if let token = oAuth2TokenStorage.token {
             UIBlockingProgressHUD.show()
             fetchProfile(token: token)
+            imagesListService.fetchPhotosNextPage()
         } else {
             showAuthViewController()
         }
@@ -91,6 +92,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let token):
                 self.fetchProfile(token: token)
+                self.imagesListService.fetchPhotosNextPage()
             case .failure:
                 UIBlockingProgressHUD.dismiss()
                 self.showNetworkError()
@@ -116,7 +118,6 @@ extension SplashViewController: AuthViewControllerDelegate {
             guard let self = self else { return }
             switch result {
             case .success:
-                self.imagesListService.fetchPhotosNextPage(token)
                 self.switchToTabBarController()
             case .failure:
                 self.showNetworkError()

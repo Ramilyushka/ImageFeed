@@ -9,7 +9,7 @@ import Foundation
 
 private let dateTimeDefaultFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "dd.MM.YY hh:mm"
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
     return dateFormatter
 }()
 
@@ -20,7 +20,7 @@ extension Date {
 struct Photo {
     let id: String
     let size: CGSize
-    let createdAt: String?
+    let createdAt: Date?
     let welcomeDescription: String?
     let thumbImageURL: String
     let largeImageURL: String
@@ -32,7 +32,7 @@ extension Photo {
         self.init(
             id: photoResult.id,
             size: CGSize(width: photoResult.width, height: photoResult.height),
-            createdAt: photoResult.createdAt,
+            createdAt: dateTimeDefaultFormatter.date(from: photoResult.createdAt),
             welcomeDescription: photoResult.welcomeDescription,
             thumbImageURL: photoResult.thumbImageURL,
             largeImageURL: photoResult.largeImageURL,
@@ -53,7 +53,7 @@ struct PhotoResult: Codable {
     let id: String
     let width: Double
     let height: Double
-    let createdAt: String?
+    let createdAt: String
     let welcomeDescription: String?
     let isLiked: Bool
     let photoURLs: PhotoURLs

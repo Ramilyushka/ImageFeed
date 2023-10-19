@@ -26,12 +26,12 @@ final class ImagesListService {
             baseUrl:  Constants.defaultApiBaseURL)
     }
     
-    func fetchPhotosNextPage(_ token: String) {
+    func fetchPhotosNextPage() {
         assert(Thread.isMainThread)
         currentTask?.cancel()
         
         var request = photoRequest()
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(OAuth2TokenStorage.shared.token ?? "")", forHTTPHeaderField: "Authorization")
         print("----REQUEST PHOTOS ------")
         print(request)
         
@@ -52,20 +52,18 @@ final class ImagesListService {
                 let photoResultArray = photoResultArrray
                 
                 for photoResult in photoResultArray {
-                    photos.append(Photo(result: photoResult))
+                    self.photos.append(Photo(result: photoResult))
                 }
-               // completion(.success(self.photos))
+                
+                lastLoadedPage += 1
                 
                 NotificationCenter.default.post(
                     name: ImagesListService.didChangeNotification,
                     object: self,
-                    userInfo: ["photos": photos])
-                
-                lastLoadedPage += 1
+                    userInfo: ["photos": self.photos])
                 
             case .failure(let error):
                 print(error)
-               // completion(.failure(error))
             }
         }
     }
