@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import WebKit
 
 class ProfileViewController: UIViewController {
     
@@ -57,8 +58,52 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func didTapLogoutButton(_ sender: Any) {
+     
+        let alert = UIAlertController(
+            title: "Пока, пока!",
+            message: "Уверены что хотите выйти?",
+            preferredStyle: .alert)
+        
+        let actionCancel = UIAlertAction(
+            title: "Да",
+            style: .default,
+            handler: {_ in
+                self.cleanTokenStorage()
+                self.cleanCookies()
+                self.showSplashViewController()
+            })
+        alert.addAction(actionCancel)
+        
+        let actionContinue = UIAlertAction(
+            title: "Нет",
+            style: .default,
+            handler: nil)
+        alert.addAction(actionContinue)
+        
+        self.present(alert, animated: true)
+    }
+    
+    private func cleanTokenStorage(){
         let isTokenRemoved  = OAuth2TokenStorage.shared.removeToken()
         print("Was the token removed? \(isTokenRemoved)")
+    }
+    
+    private func cleanCookies() {
+       // Очищаем все куки из хранилища.
+       HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+       // Запрашиваем все данные из локального хранилища.
+       WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+          // Массив полученных записей удаляем из хранилища.
+          records.forEach { record in
+             WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+          }
+       }
+    }
+    
+    private func showSplashViewController(){
+        let splashViewController = SplashViewController()
+        splashViewController.modalPresentationStyle = .fullScreen
+        present(splashViewController, animated: true, completion: nil)
     }
 }
 
