@@ -8,8 +8,6 @@ class ImagesListViewController: UIViewController {
     private let imagesListService = ImagesListService.shared
     
     @IBOutlet private var tableView: UITableView!
-//    
-//    private let photoNames: [String] = Array(0..<10).map{"\($0)"}
     
     private (set) var photos: [Photo] = []
     
@@ -55,14 +53,12 @@ extension ImagesListViewController: UITableViewDataSource {
     
     //количество ячеек в секции.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("---numberOfRowsInSection---- \(photos.count)")
         return photos.count
     }
     
     //получение объекта ячейки
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        print("----cellForRowAt----")
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
         
         guard let imageListCell = cell as? ImagesListCell else {
@@ -80,16 +76,13 @@ extension ImagesListViewController: UITableViewDataSource {
         
         guard
             let url = URL(string: photos[indexPath.row].thumbImageURL)
-        else {
-            print("-----GUARD----- thumbImageURL")
-            return }
+        else { return }
         
         cell.cellImageView.kf.indicatorType = .activity
         cell.cellImageView.kf.setImage(
             with: url,
             placeholder:  UIImage(named: "stub_image"),
             completionHandler: { _ in
-                print("---indexPath----\(indexPath)")
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             })
         
@@ -99,7 +92,6 @@ extension ImagesListViewController: UITableViewDataSource {
     
     //задать высоту ячейке
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        print("----heightForRowAt---- \(indexPath)")
         let size = photos[indexPath.row].size
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
@@ -111,7 +103,6 @@ extension ImagesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row + 1 == photos.count {
-            print("----willDisplay----")
             imagesListService.fetchPhotosNextPage()
         }
         else { return }

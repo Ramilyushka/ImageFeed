@@ -75,6 +75,6 @@ struct PhotoResult: Codable {
     }
 }
 
-struct OnePhoto: Codable {
+struct OnePhotoResult: Codable {
     let photo: PhotoResult
 }

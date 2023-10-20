@@ -26,9 +26,9 @@ class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        alertPresenter.delegate = self
         
         createSplashImageView()
+        alertPresenter.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,10 +93,8 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success(let token):
                 self.fetchProfile(token: token)
                 self.imagesListService.fetchPhotosNextPage()
-            case .failure(let error):
+            case .failure(_):
                 UIBlockingProgressHUD.dismiss()
-                print("----ERROR fetchAuthToken----")
-                print(error)
                 self.showNetworkError()
             }
         }
@@ -108,10 +106,8 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let profile):
                 self.fetchProfileImage(username: profile.userName, token: token)
-            case .failure(let error):
+            case .failure(_):
                 UIBlockingProgressHUD.dismiss()
-                print("----ERROR fetchProfile----")
-                print(error)
                 self.showNetworkError()
             }
         }
@@ -123,9 +119,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success:
                 self.switchToTabBarController()
-            case .failure(let error):
-                print("----ERROR fetchProfileImageURL----")
-                print(error)
+            case .failure(_):
                 self.showNetworkError()
             }
             UIBlockingProgressHUD.dismiss()

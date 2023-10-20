@@ -33,24 +33,22 @@ class SingleImageViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let imageResult):
+                UIBlockingProgressHUD.dismiss()
                 self.image = imageResult.image
                 self.rescaleAndCenterImageInScrollView(image: imageResult.image)
             case .failure(let error):
-                print(error)
-                self.showError()
+                UIBlockingProgressHUD.dismiss()
+                self.showError(error.localizedDescription)
             }
-            UIBlockingProgressHUD.dismiss()
         }
     }
     
-    private func showError() {
+    private func showError(_ errorText: String) {
         
         let alert = UIAlertController(
             title: "Что-то пошло не так.",
-            message: "Попробовать ещё раз?",
+            message: "Попробовать ещё раз?\n\(errorText)",
             preferredStyle: .alert)
-        
-        //alert.view.accessibilityIdentifier = "Alert"
         
         let actionCancel = UIAlertAction(
             title: "Не надо",

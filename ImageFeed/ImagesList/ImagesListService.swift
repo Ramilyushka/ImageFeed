@@ -33,15 +33,10 @@ final class ImagesListService {
             
             self?.taskNextPhoto = nil
             
-            guard let self = self else  {
-                print("GUARD ImagesListService")
-                return
-            }
+            guard let self = self else  { return }
             
             switch result {
-            case .success(let photoResultArrray):
-                
-                let photoResultArray = photoResultArrray
+            case .success(let photoResultArray):
                 
                 for photoResult in photoResultArray {
                     self.photos.append(Photo(result: photoResult))
@@ -69,14 +64,14 @@ final class ImagesListService {
         print("----REQUEST PHOTOS ------")
         print(request)
         
-        taskChangeLike = urlSession.object(for: request){(result: Result<OnePhoto, Error>) in
+        taskChangeLike = urlSession.object(for: request) { (result: Result<OnePhotoResult, Error>) in
             
             self.taskChangeLike = nil
             
             switch result {
-            case .success(let onePhoto):
+            case .success(let onePhotoResult):
                 // Поиск индекса элемента
-                if let index = self.photos.firstIndex(where: { $0.id == onePhoto.photo.id }) {
+                if let index = self.photos.firstIndex(where: { $0.id == onePhotoResult.photo.id }) {
                     self.photos[index].changeLike()
                 }
                 completion(.success(()))
