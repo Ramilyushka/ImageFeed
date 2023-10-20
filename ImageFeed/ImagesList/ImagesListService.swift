@@ -18,7 +18,8 @@ final class ImagesListService {
     private var taskChangeLike: URLSessionTask?
     
     private (set) var photos: [Photo] = []
-    private var lastLoadedPage = 2
+    private var lastLoadedPage = 1
+    private var perPage = 10
     
     func fetchPhotosNextPage() {
         assert(Thread.isMainThread)
@@ -81,7 +82,7 @@ extension ImagesListService {
     
     private func photoRequest() -> URLRequest {
         URLRequest.makeHTTPRequest(
-            path: "/photos?page=\(lastLoadedPage)&per_page=3",
+            path: "/photos?page=\(lastLoadedPage)&per_page=\(perPage)",
             httpMethod: "GET",
             baseUrl:  Constants.defaultApiBaseURL)
     }
