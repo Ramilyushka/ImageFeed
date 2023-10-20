@@ -7,15 +7,7 @@
 
 import Foundation
 
-private let dateTimeDefaultFormatter: DateFormatter = {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-    return dateFormatter
-}()
-
-extension Date {
-    var dateTimeString: String { dateTimeDefaultFormatter.string(from: self) }
-}
+private let dateFormatter = ISO8601DateFormatter()
 
 struct Photo {
     let id: String
@@ -36,7 +28,7 @@ extension Photo {
         self.init(
             id: photoResult.id,
             size: CGSize(width: photoResult.width, height: photoResult.height),
-            createdAt: dateTimeDefaultFormatter.date(from: photoResult.createdAt),
+            createdAt: dateFormatter.date(from: photoResult.createdAt),
             welcomeDescription: photoResult.welcomeDescription,
             thumbImageURL: photoResult.thumbImageURL,
             largeImageURL: photoResult.largeImageURL,

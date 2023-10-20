@@ -101,9 +101,9 @@ class ProfileViewController: UIViewController {
     }
     
     private func showSplashViewController(){
+        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
         let splashViewController = SplashViewController()
-        splashViewController.modalPresentationStyle = .fullScreen
-        present(splashViewController, animated: true, completion: nil)
+        window.rootViewController = splashViewController
     }
 }
 

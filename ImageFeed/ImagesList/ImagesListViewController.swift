@@ -51,12 +51,10 @@ class ImagesListViewController: UIViewController {
 
 extension ImagesListViewController: UITableViewDataSource {
     
-    //количество ячеек в секции.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photos.count
     }
     
-    //получение объекта ячейки
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
@@ -71,7 +69,6 @@ extension ImagesListViewController: UITableViewDataSource {
         return imageListCell
     }
     
-    //метод конфигурации ячейки
     func configCell (for cell: ImagesListCell, with indexPath: IndexPath) {
         
         guard
@@ -86,11 +83,13 @@ extension ImagesListViewController: UITableViewDataSource {
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             })
         
-        cell.dateLabel.text = dateFormatter.string(from: photos[indexPath.row].createdAt ?? Date()) + " row \(indexPath.row) "
+        if let date = photos[indexPath.row].createdAt {
+            cell.dateLabel.text = dateFormatter.string(from: date)
+        } else { cell.dateLabel.text = "" }
+       
         cell.setIsLiked(isLike: photos[indexPath.row].isLiked)
     }
     
-    //задать высоту ячейке
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let size = photos[indexPath.row].size
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
@@ -113,19 +112,17 @@ extension ImagesListViewController: ImagesListCellDelegate {
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let photo = photos[indexPath.row]
-        print("PHOTO like \(photo.isLiked)")
+        
         UIBlockingProgressHUD.show()
         imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { result in
             switch result {
             case .success():
                 self.photos = self.imagesListService.photos
                 cell.setIsLiked(isLike:  self.photos[indexPath.row].isLiked)
-                print("PHOTO change like \(self.photos[indexPath.row].isLiked)")
-                UIBlockingProgressHUD.dismiss()
             case .failure(let error):
-                UIBlockingProgressHUD.dismiss()
                 print(error)
             }
+            UIBlockingProgressHUD.dismiss()
         }
     }
 }

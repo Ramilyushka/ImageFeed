@@ -26,8 +26,6 @@ final class ImagesListService {
         
         var request = photoRequest()
         request.setValue("Bearer \(OAuth2TokenStorage.shared.token ?? "")", forHTTPHeaderField: "Authorization")
-        print("----REQUEST PHOTOS ------")
-        print(request)
         
         taskNextPhoto = urlSession.object(for: request) {[weak self] (result: Result<[PhotoResult], Error>) in
             
@@ -61,8 +59,6 @@ final class ImagesListService {
         
         var request = likeRequest(photoId, isLike)
         request.setValue("Bearer \(OAuth2TokenStorage.shared.token ?? "")", forHTTPHeaderField: "Authorization")
-        print("----REQUEST PHOTOS ------")
-        print(request)
         
         taskChangeLike = urlSession.object(for: request) { (result: Result<OnePhotoResult, Error>) in
             
@@ -70,7 +66,6 @@ final class ImagesListService {
             
             switch result {
             case .success(let onePhotoResult):
-                // Поиск индекса элемента
                 if let index = self.photos.firstIndex(where: { $0.id == onePhotoResult.photo.id }) {
                     self.photos[index].changeLike()
                 }
@@ -86,7 +81,7 @@ extension ImagesListService {
     
     private func photoRequest() -> URLRequest {
         URLRequest.makeHTTPRequest(
-            path: "/photos?page=\(lastLoadedPage)&per_page=10",
+            path: "/photos?page=\(lastLoadedPage)&per_page=3",
             httpMethod: "GET",
             baseUrl:  Constants.defaultApiBaseURL)
     }
