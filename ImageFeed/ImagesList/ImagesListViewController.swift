@@ -18,9 +18,13 @@ final class ImagesListViewController: UIViewController {
         return formatter
     }()
     
+    private var animationLayers = [CALayer]()
+    private var gradient =  CAGradientLayer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        animation()
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         
         imagesListServiceObserver = NotificationCenter.default
@@ -34,7 +38,34 @@ final class ImagesListViewController: UIViewController {
         updateTableViewAnimated()
     }
     
-    func updateTableViewAnimated() {
+    private func animation() {
+        
+        
+        let size = imagesListCell.cellImageView.frame.size
+        
+        gradient.frame = CGRect(origin: .zero, size: CGSize(width: 414, height: 414))
+        gradient.locations = [0, 0.1, 0.3]
+        gradient.colors = [
+            UIColor(red: 0.682, green: 0.686, blue: 0.706, alpha: 1).cgColor,
+            UIColor(red: 0.531, green: 0.533, blue: 0.553, alpha: 1).cgColor,
+            UIColor(red: 0.431, green: 0.433, blue: 0.453, alpha: 1).cgColor
+        ]
+        gradient.startPoint = CGPoint(x: 0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1, y: 0.5)
+        //gradient.cornerRadius = 35
+        gradient.masksToBounds = true
+        animationLayers.append(gradient)
+        imagesListCell.cellImageView.layer.addSublayer(gradient)
+        
+        let gradientChangeAnimation = CABasicAnimation(keyPath: "locations")
+        gradientChangeAnimation.duration = 1.0
+        gradientChangeAnimation.repeatCount = .infinity
+        gradientChangeAnimation.fromValue = [0, 0.1, 0.3]
+        gradientChangeAnimation.toValue = [0, 0.8, 1]
+        gradient.add(gradientChangeAnimation, forKey: "locationsChange")
+    }
+    
+    private func updateTableViewAnimated() {
         let oldCount = photos.count
         let newCount = imagesListService.photos.count
         photos = imagesListService.photos
@@ -46,6 +77,7 @@ final class ImagesListViewController: UIViewController {
                 tableView.insertRows(at: indexPaths, with: .automatic)
             } completion: { _ in }
         }
+        gradient.removeFromSuperlayer()
     }
 }
 
@@ -69,8 +101,7 @@ extension ImagesListViewController: UITableViewDataSource {
         return imageListCell
     }
     
-    func configCell (for cell: ImagesListCell, with indexPath: IndexPath) {
-        
+    private func configCell (for cell: ImagesListCell, with indexPath: IndexPath) {
         guard
             let url = URL(string: photos[indexPath.row].thumbImageURL)
         else { return }

@@ -196,7 +196,6 @@
                                         <connections>
                                             <outlet property="cellImageView" destination="Wkb-Tc-xJv" id="o4t-Tr-WPg"/>
                                             <outlet property="dateLabel" destination="f6g-pJ-YTn" id="ats-gM-uAU"/>
-                                            <outlet property="imageView" destination="Wkb-Tc-xJv" id="nnq-YI-Xiz"/>
                                             <outlet property="likeButton" destination="2us-dY-VMx" id="rY3-by-nb2"/>
                                         </connections>
                                     </tableViewCell>
