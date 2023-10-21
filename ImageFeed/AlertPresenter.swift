@@ -15,7 +15,7 @@ struct AlertModel {
     var completion: ((UIAlertAction) -> Void)?
 }
 
-class AlertPresenter {
+final class AlertPresenter {
     
     weak var delegate: UIViewController?
     

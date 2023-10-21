@@ -1,7 +1,7 @@
 import UIKit
 import Kingfisher
 
-class ImagesListViewController: UIViewController {
+final class ImagesListViewController: UIViewController {
     
     let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     private var imagesListServiceObserver: NSObjectProtocol?
@@ -78,7 +78,7 @@ extension ImagesListViewController: UITableViewDataSource {
         cell.cellImageView.kf.indicatorType = .activity
         cell.cellImageView.kf.setImage(
             with: url,
-            placeholder:  UIImage(named: "stub_image"),
+            placeholder: UIImage(named: "stub_image"),
             completionHandler: { _ in
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             })

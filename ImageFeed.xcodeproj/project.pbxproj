@@ -22,7 +22,7 @@
 		A86723022AD5D868006DFD44 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = A86723012AD5D868006DFD44 /* SwiftKeychainWrapper */; };
 		A86723062AD71F24006DFD44 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86723052AD71F24006DFD44 /* TabBarController.swift */; };
 		A86723082ADD6EF5006DFD44 /* ImagesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86723072ADD6EF5006DFD44 /* ImagesListService.swift */; };
-		A867230A2ADD70C3006DFD44 /* ImagesListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86723092ADD70C3006DFD44 /* ImagesListModels.swift */; };
+		A867230A2ADD70C3006DFD44 /* PhotoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86723092ADD70C3006DFD44 /* PhotoModels.swift */; };
 		A8A11A532A25026600A40217 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11A522A25026600A40217 /* AppDelegate.swift */; };
 		A8A11A552A25026600A40217 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11A542A25026600A40217 /* SceneDelegate.swift */; };
 		A8A11A572A25026600A40217 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A11A562A25026600A40217 /* ImagesListViewController.swift */; };
@@ -35,6 +35,8 @@
 		A8B640242A5EFF2400218167 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B640232A5EFF2400218167 /* ProfileViewController.swift */; };
 		A8EBC25C2A5744AC0057ED6D /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8EBC25B2A5744AC0057ED6D /* UIColor+Extensions.swift */; };
 		A8EBC25E2A5745FF0057ED6D /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8EBC25D2A5745FF0057ED6D /* ImagesListCell.swift */; };
+		A8FA49232AE42403004C2A57 /* PhotoModelsCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49222AE42403004C2A57 /* PhotoModelsCodable.swift */; };
+		A8FA49252AE4250E004C2A57 /* ProfileModelsCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49242AE4250E004C2A57 /* ProfileModelsCodable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +52,7 @@
 		A866DEBA2AD0A19B0043BAAE /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		A86723052AD71F24006DFD44 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A86723072ADD6EF5006DFD44 /* ImagesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListService.swift; sourceTree = "<group>"; };
-		A86723092ADD70C3006DFD44 /* ImagesListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListModels.swift; sourceTree = "<group>"; };
+		A86723092ADD70C3006DFD44 /* PhotoModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModels.swift; sourceTree = "<group>"; };
 		A8A11A4F2A25026600A40217 /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8A11A522A25026600A40217 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8A11A542A25026600A40217 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +67,8 @@
 		A8B640232A5EFF2400218167 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A8EBC25B2A5744AC0057ED6D /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		A8EBC25D2A5745FF0057ED6D /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
+		A8FA49222AE42403004C2A57 /* PhotoModelsCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModelsCodable.swift; sourceTree = "<group>"; };
+		A8FA49242AE4250E004C2A57 /* ProfileModelsCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModelsCodable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,9 +147,10 @@
 			isa = PBXGroup;
 			children = (
 				A8B640232A5EFF2400218167 /* ProfileViewController.swift */,
-				A866DEB52ACDD0610043BAAE /* ProfileModels.swift */,
 				A866DEB12ACC87600043BAAE /* ProfileInfoService.swift */,
 				A866DEB32ACDCFEB0043BAAE /* ProfileImageService.swift */,
+				A866DEB52ACDD0610043BAAE /* ProfileModels.swift */,
+				A8FA49242AE4250E004C2A57 /* ProfileModelsCodable.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -165,7 +170,8 @@
 				A8EBC25D2A5745FF0057ED6D /* ImagesListCell.swift */,
 				A824D3FB2A5F2C9D006A6F5E /* SingleImageViewController.swift */,
 				A86723072ADD6EF5006DFD44 /* ImagesListService.swift */,
-				A86723092ADD70C3006DFD44 /* ImagesListModels.swift */,
+				A86723092ADD70C3006DFD44 /* PhotoModels.swift */,
+				A8FA49222AE42403004C2A57 /* PhotoModelsCodable.swift */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -255,12 +261,13 @@
 				A8A9A3712A745ADC00F39954 /* WebViewViewController.swift in Sources */,
 				A8B640242A5EFF2400218167 /* ProfileViewController.swift in Sources */,
 				A8A11A572A25026600A40217 /* ImagesListViewController.swift in Sources */,
+				A8FA49252AE4250E004C2A57 /* ProfileModelsCodable.swift in Sources */,
 				A86723082ADD6EF5006DFD44 /* ImagesListService.swift in Sources */,
 				A866DEB82AD078C60043BAAE /* NetworkService.swift in Sources */,
 				A8A11A532A25026600A40217 /* AppDelegate.swift in Sources */,
 				A846345A2A9B968B0004CFEF /* OAuth2Service.swift in Sources */,
 				A866DEB62ACDD0610043BAAE /* ProfileModels.swift in Sources */,
-				A867230A2ADD70C3006DFD44 /* ImagesListModels.swift in Sources */,
+				A867230A2ADD70C3006DFD44 /* PhotoModels.swift in Sources */,
 				A856F3292AB1E638004C97FA /* SplashViewController.swift in Sources */,
 				A824D3FC2A5F2C9D006A6F5E /* SingleImageViewController.swift in Sources */,
 				A8EBC25E2A5745FF0057ED6D /* ImagesListCell.swift in Sources */,
@@ -269,6 +276,7 @@
 				A86723062AD71F24006DFD44 /* TabBarController.swift in Sources */,
 				A8EBC25C2A5744AC0057ED6D /* UIColor+Extensions.swift in Sources */,
 				A8A9A36F2A7458ED00F39954 /* AuthViewController.swift in Sources */,
+				A8FA49232AE42403004C2A57 /* PhotoModelsCodable.swift in Sources */,
 				A866DEBB2AD0A19B0043BAAE /* AlertPresenter.swift in Sources */,
 				A8A9A36B2A7441EA00F39954 /* Constants.swift in Sources */,
 				A866DEB02ACC84A50043BAAE /* UIBlockingProgressHUD.swift in Sources */,

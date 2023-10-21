@@ -5,7 +5,7 @@ protocol ImagesListCellDelegate: AnyObject {
     func imageListCellDidTapLike(_ cell: ImagesListCell)
 }
 
-class ImagesListCell: UITableViewCell {
+final class ImagesListCell: UITableViewCell {
     
     static let reuseIdentifier = "ImagesListCell"
     
@@ -13,7 +13,7 @@ class ImagesListCell: UITableViewCell {
     
     @IBOutlet weak var cellImageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet private weak var likeButton: UIButton!
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -26,10 +26,6 @@ class ImagesListCell: UITableViewCell {
     }
     
     func setIsLiked(isLike: Bool){
-        if isLike {
-            likeButton.setImage(UIImage(named: "like_active"), for: .normal)
-        } else {
-            likeButton.setImage(UIImage(named: "like_no_active"), for: .normal)
-        }
+        likeButton.setImage(UIImage(named: isLike ? "like_active" : "like_no_active"), for: .normal)
     }
 }
