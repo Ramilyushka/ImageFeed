@@ -85,8 +85,6 @@ extension WebViewViewController: WKNavigationDelegate {
             let codeItem = items.first(where: {$0.name == "code"})
         {
             return codeItem.value
-        } else {
-            return nil
-        }
+        } else { return nil }
     }
 }

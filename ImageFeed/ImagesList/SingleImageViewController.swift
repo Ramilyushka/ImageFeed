@@ -6,16 +6,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SingleImageViewController: UIViewController {
     
-    var image: UIImage! {
-        didSet {
-            guard isViewLoaded else { return }
-            singleImageView.image = image
-            rescaleAndCenterImageInScrollView(image: image)
-        }
-    }
+    var fullImageURL: URL?
+    
+    private var image: UIImage?
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet var singleImageView: UIImageView!
@@ -26,8 +23,50 @@ class SingleImageViewController: UIViewController {
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 1.25
         
-        singleImageView.image = image
-        rescaleAndCenterImageInScrollView(image: image)
+        setImage()
+    }
+    
+    private func setImage() {
+        UIBlockingProgressHUD.show()
+        singleImageView.kf.setImage(with: fullImageURL) { [weak self] result in
+            
+            guard let self = self else { return }
+            switch result {
+            case .success(let imageResult):
+                UIBlockingProgressHUD.dismiss()
+                self.image = imageResult.image
+                self.rescaleAndCenterImageInScrollView(image: imageResult.image)
+            case .failure(let error):
+                UIBlockingProgressHUD.dismiss()
+                self.showError(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func showError(_ errorText: String) {
+        
+        let alert = UIAlertController(
+            title: "Что-то пошло не так.",
+            message: "Попробовать ещё раз?\n\(errorText)",
+            preferredStyle: .alert)
+        
+        let actionCancel = UIAlertAction(
+            title: "Не надо",
+            style: .default,
+            handler: {_ in
+                self.dismiss(animated: true, completion: nil)
+            })
+        alert.addAction(actionCancel)
+        
+        let actionContinue = UIAlertAction(
+            title: "Повторить",
+            style: .default,
+            handler: {_ in
+                self.setImage()
+            })
+        alert.addAction(actionContinue)
+        
+        self.present(alert, animated: true)
     }
     
     @IBAction func didTapBackButton(_ sender: Any) {

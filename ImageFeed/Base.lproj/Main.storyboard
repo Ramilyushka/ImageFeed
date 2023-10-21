@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="auth_screen_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gm8-C0-McZ">
-                                <rect key="frame" x="177" y="447" width="60" height="60"/>
+                                <rect key="frame" x="177" y="425" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="L7n-Sq-C3K"/>
                                     <constraint firstAttribute="height" constant="60" id="ode-er-nXx"/>
@@ -135,7 +135,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k3f-6z-nkz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2217" y="-64"/>
+            <point key="canvasLocation" x="-1970" y="-242"/>
         </scene>
         <!--ImageList-->
         <scene sceneID="tne-QT-ifu">
@@ -175,6 +175,9 @@
                                                     <rect key="frame" x="354" y="4" width="44" height="44"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="like_active"/>
+                                                    <connections>
+                                                        <action selector="likeButtonClicked:" destination="iIX-Dk-wKW" eventType="touchUpInside" id="Cc1-BO-dlp"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -235,7 +238,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Wo-Ld-4eD">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="OIi-7K-Vd3">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" translatesAutoresizingMaskIntoConstraints="NO" id="OIi-7K-Vd3">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                     </imageView>
                                 </subviews>
@@ -293,24 +296,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6by-5N-Frt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-455" y="-242"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="5Ah-3K-oCa">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D8u-5C-gb9" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KM2-Hs-nfJ">
-                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="WDR-3E-WWJ" kind="relationship" relationship="rootViewController" id="kDb-kz-7jJ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Uik-0l-nBC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2216" y="-903"/>
         </scene>
     </scenes>
     <resources>

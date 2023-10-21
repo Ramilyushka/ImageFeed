@@ -18,6 +18,7 @@ class SplashViewController: UIViewController {
     
     private let profileInfoService = ProfileInfoService.shared
     private let profileImageService = ProfileImageService.shared
+    private let imagesListService = ImagesListService.shared
     
     private var alertPresenter = AlertPresenter()
     
@@ -25,9 +26,9 @@ class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        alertPresenter.delegate = self
         
         createSplashImageView()
+        alertPresenter.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,6 +40,7 @@ class SplashViewController: UIViewController {
         if let token = oAuth2TokenStorage.token {
             UIBlockingProgressHUD.show()
             fetchProfile(token: token)
+            imagesListService.fetchPhotosNextPage()
         } else {
             showAuthViewController()
         }
@@ -90,7 +92,8 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let token):
                 self.fetchProfile(token: token)
-            case .failure:
+                self.imagesListService.fetchPhotosNextPage()
+            case .failure(_):
                 UIBlockingProgressHUD.dismiss()
                 self.showNetworkError()
             }
@@ -103,7 +106,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let profile):
                 self.fetchProfileImage(username: profile.userName, token: token)
-            case .failure:
+            case .failure(_):
                 UIBlockingProgressHUD.dismiss()
                 self.showNetworkError()
             }
@@ -116,7 +119,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success:
                 self.switchToTabBarController()
-            case .failure:
+            case .failure(_):
                 self.showNetworkError()
             }
             UIBlockingProgressHUD.dismiss()
