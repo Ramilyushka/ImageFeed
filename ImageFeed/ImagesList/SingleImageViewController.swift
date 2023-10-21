@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class SingleImageViewController: UIViewController {
+final class SingleImageViewController: UIViewController {
     
     var fullImageURL: URL?
     

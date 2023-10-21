@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 import WebKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
     private let profileService = ProfileInfoService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
