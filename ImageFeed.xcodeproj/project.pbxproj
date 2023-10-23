@@ -37,6 +37,8 @@
 		A8EBC25E2A5745FF0057ED6D /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8EBC25D2A5745FF0057ED6D /* ImagesListCell.swift */; };
 		A8FA49232AE42403004C2A57 /* PhotoModelsCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49222AE42403004C2A57 /* PhotoModelsCodable.swift */; };
 		A8FA49252AE4250E004C2A57 /* ProfileModelsCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49242AE4250E004C2A57 /* ProfileModelsCodable.swift */; };
+		A8FA49272AE6B6F7004C2A57 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49262AE6B6F7004C2A57 /* WebViewPresenter.swift */; };
+		A8FA49292AE6C685004C2A57 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49282AE6C685004C2A57 /* AuthHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,8 @@
 		A8EBC25D2A5745FF0057ED6D /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		A8FA49222AE42403004C2A57 /* PhotoModelsCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModelsCodable.swift; sourceTree = "<group>"; };
 		A8FA49242AE4250E004C2A57 /* ProfileModelsCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModelsCodable.swift; sourceTree = "<group>"; };
+		A8FA49262AE6B6F7004C2A57 /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
+		A8FA49282AE6C685004C2A57 /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,8 @@
 				A84634592A9B968B0004CFEF /* OAuth2Service.swift */,
 				A8A9A36E2A7458ED00F39954 /* AuthViewController.swift */,
 				A8A9A3702A745ADC00F39954 /* WebViewViewController.swift */,
+				A8FA49262AE6B6F7004C2A57 /* WebViewPresenter.swift */,
+				A8FA49282AE6C685004C2A57 /* AuthHelper.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -268,6 +274,7 @@
 				A846345A2A9B968B0004CFEF /* OAuth2Service.swift in Sources */,
 				A866DEB62ACDD0610043BAAE /* ProfileModels.swift in Sources */,
 				A867230A2ADD70C3006DFD44 /* PhotoModels.swift in Sources */,
+				A8FA49292AE6C685004C2A57 /* AuthHelper.swift in Sources */,
 				A856F3292AB1E638004C97FA /* SplashViewController.swift in Sources */,
 				A824D3FC2A5F2C9D006A6F5E /* SingleImageViewController.swift in Sources */,
 				A8EBC25E2A5745FF0057ED6D /* ImagesListCell.swift in Sources */,
@@ -278,6 +285,7 @@
 				A8A9A36F2A7458ED00F39954 /* AuthViewController.swift in Sources */,
 				A8FA49232AE42403004C2A57 /* PhotoModelsCodable.swift in Sources */,
 				A866DEBB2AD0A19B0043BAAE /* AlertPresenter.swift in Sources */,
+				A8FA49272AE6B6F7004C2A57 /* WebViewPresenter.swift in Sources */,
 				A8A9A36B2A7441EA00F39954 /* Constants.swift in Sources */,
 				A866DEB02ACC84A50043BAAE /* UIBlockingProgressHUD.swift in Sources */,
 				A866DEB22ACC87600043BAAE /* ProfileInfoService.swift in Sources */,
