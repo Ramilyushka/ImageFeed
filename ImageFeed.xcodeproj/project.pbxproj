@@ -42,6 +42,7 @@
 		A8FA49312AE6C895004C2A57 /* WebViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49302AE6C895004C2A57 /* WebViewTests.swift */; };
 		A8FA49382AE6D136004C2A57 /* WebViewViewCotrollerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49372AE6D136004C2A57 /* WebViewViewCotrollerSpy.swift */; };
 		A8FA493A2AE6D1A0004C2A57 /* WebViewPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49392AE6D1A0004C2A57 /* WebViewPresenterSpy.swift */; };
+		A8FA493C2AE6D304004C2A57 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA493B2AE6D304004C2A57 /* ProfilePresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		A8FA49302AE6C895004C2A57 /* WebViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewTests.swift; sourceTree = "<group>"; };
 		A8FA49372AE6D136004C2A57 /* WebViewViewCotrollerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewCotrollerSpy.swift; sourceTree = "<group>"; };
 		A8FA49392AE6D1A0004C2A57 /* WebViewPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenterSpy.swift; sourceTree = "<group>"; };
+		A8FA493B2AE6D304004C2A57 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				A8B640232A5EFF2400218167 /* ProfileViewController.swift */,
+				A8FA493B2AE6D304004C2A57 /* ProfilePresenter.swift */,
 				A866DEB12ACC87600043BAAE /* ProfileInfoService.swift */,
 				A866DEB32ACDCFEB0043BAAE /* ProfileImageService.swift */,
 				A866DEB52ACDD0610043BAAE /* ProfileModels.swift */,
@@ -339,6 +342,7 @@
 				A8A11A532A25026600A40217 /* AppDelegate.swift in Sources */,
 				A846345A2A9B968B0004CFEF /* OAuth2Service.swift in Sources */,
 				A866DEB62ACDD0610043BAAE /* ProfileModels.swift in Sources */,
+				A8FA493C2AE6D304004C2A57 /* ProfilePresenter.swift in Sources */,
 				A867230A2ADD70C3006DFD44 /* PhotoModels.swift in Sources */,
 				A8FA49292AE6C685004C2A57 /* AuthHelper.swift in Sources */,
 				A856F3292AB1E638004C97FA /* SplashViewController.swift in Sources */,
