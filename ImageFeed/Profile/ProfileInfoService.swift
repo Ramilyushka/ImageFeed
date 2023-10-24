@@ -7,7 +7,12 @@
 
 import Foundation
 
-final class ProfileInfoService {
+public protocol ProfileInfoServiceProtocol {
+    var profile: Profile? { get }
+    func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void)
+}
+
+final class ProfileInfoService: ProfileInfoServiceProtocol {
     
     static let shared = ProfileInfoService()
     
@@ -41,12 +46,19 @@ final class ProfileInfoService {
             case .success(let profileResult):
                 
                 let profile = Profile(result: profileResult)
-                self.profile = profile
+                self.profile = self.makeProfile(profile)
                 completion(.success(profile))
                 
             case .failure(let error):
                 completion(.failure(error))
             }
         }
+    }
+    
+    func makeProfile(_ profile: Profile?) -> Profile? {
+        guard let _ = profile else {
+            return nil
+        }
+        return profile
     }
 }

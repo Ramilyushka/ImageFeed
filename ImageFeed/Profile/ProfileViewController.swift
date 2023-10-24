@@ -7,12 +7,12 @@
 
 import UIKit
 import Kingfisher
-import WebKit
 
 public protocol ProfileViewControllerProtocol {
-    var presenter: ProfilePresenterProtocol? {get set}
+    var presenter: ProfilePresenterProtocol? { get set }
     func updateProfileDetails(profile: Profile)
     func updateAvatar(url: URL)
+    func showLogOutAlert()
 }
 
 final class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
@@ -30,7 +30,11 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
         
         createView()
         
-        presenter = ProfilePresenter(view: self)
+        if presenter == nil {
+            presenter = ProfilePresenter(
+                profileInfoService: ProfileInfoService.shared,
+                profileImageService: ProfileImageService.shared)
+        }
         presenter?.viewDidLoad()
     }
     
@@ -47,34 +51,14 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
             placeholder: UIImage(named: "stub_profile"))
     }
     
-    @IBAction func didTapLogoutButton(_ sender: Any) {
-        createLogoutAlert {
-            self.presenter?.clearData()
-            self.presenter?.showSplashViewController()
+    func showLogOutAlert() {
+        if let alert = presenter?.createLogoutAlert() {
+            present(alert, animated: true)
         }
     }
     
-    private func createLogoutAlert(completion: @escaping ()->Void) {
-        let alert = UIAlertController(
-            title: "Пока, пока!",
-            message: "Уверены что хотите выйти?",
-            preferredStyle: .alert)
-        
-        let actionCancel = UIAlertAction(
-            title: "Да",
-            style: .default,
-            handler: {_ in
-               completion()
-            })
-        alert.addAction(actionCancel)
-        
-        let actionContinue = UIAlertAction(
-            title: "Нет",
-            style: .default,
-            handler: nil)
-        alert.addAction(actionContinue)
-        
-        self.present(alert, animated: true)
+    @IBAction private func didTapLogoutButton() {
+        showLogOutAlert()
     }
 }
 

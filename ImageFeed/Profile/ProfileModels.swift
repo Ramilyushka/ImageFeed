@@ -19,4 +19,11 @@ extension Profile {
             fullName: "\(profileResult.firstName ?? "") \(profileResult.lastName ?? "")",
             bio: profileResult.bio)
     }
+    
+    static var standart: Profile {
+        Profile(
+            userName: "Ivanov",
+            fullName: "Ivan Ivanov",
+            bio: "I am Ivan")
+    }
 }

@@ -54,7 +54,7 @@ final class ImagesListService {
         }
     }
     
-    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+    func fetchChangeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
         assert(Thread.isMainThread)
         taskChangeLike?.cancel()
         
