@@ -9,7 +9,7 @@ import Foundation
 
 private let dateFormatter = ISO8601DateFormatter()
 
-struct Photo {
+public struct Photo {
     let id: String
     let size: CGSize
     let createdAt: Date?

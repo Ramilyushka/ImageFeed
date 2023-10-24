@@ -48,6 +48,7 @@
 		A8FA49442AE6F385004C2A57 /* ProfilePresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49432AE6F385004C2A57 /* ProfilePresenterSpy.swift */; };
 		A8FA49482AE708CF004C2A57 /* ProfilePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49472AE708CF004C2A57 /* ProfilePresenterTests.swift */; };
 		A8FA494A2AE7DC7C004C2A57 /* ProfileServicesStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49492AE7DC7C004C2A57 /* ProfileServicesStub.swift */; };
+		A8FA494C2AE841D7004C2A57 /* ImagesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA494B2AE841D7004C2A57 /* ImagesListPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		A8FA49432AE6F385004C2A57 /* ProfilePresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterSpy.swift; sourceTree = "<group>"; };
 		A8FA49472AE708CF004C2A57 /* ProfilePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterTests.swift; sourceTree = "<group>"; };
 		A8FA49492AE7DC7C004C2A57 /* ProfileServicesStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServicesStub.swift; sourceTree = "<group>"; };
+		A8FA494B2AE841D7004C2A57 /* ImagesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,9 +214,10 @@
 			isa = PBXGroup;
 			children = (
 				A8A11A562A25026600A40217 /* ImagesListViewController.swift */,
+				A8FA494B2AE841D7004C2A57 /* ImagesListPresenter.swift */,
 				A8EBC25D2A5745FF0057ED6D /* ImagesListCell.swift */,
-				A824D3FB2A5F2C9D006A6F5E /* SingleImageViewController.swift */,
 				A86723072ADD6EF5006DFD44 /* ImagesListService.swift */,
+				A824D3FB2A5F2C9D006A6F5E /* SingleImageViewController.swift */,
 				A86723092ADD70C3006DFD44 /* PhotoModels.swift */,
 				A8FA49222AE42403004C2A57 /* PhotoModelsCodable.swift */,
 			);
@@ -364,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A846345C2A9B97870004CFEF /* OAuth2TokenStorage.swift in Sources */,
+				A8FA494C2AE841D7004C2A57 /* ImagesListPresenter.swift in Sources */,
 				A8A9A3712A745ADC00F39954 /* WebViewViewController.swift in Sources */,
 				A8B640242A5EFF2400218167 /* ProfileViewController.swift in Sources */,
 				A8A11A572A25026600A40217 /* ImagesListViewController.swift in Sources */,

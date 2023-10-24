@@ -90,9 +90,9 @@ final class ProfilePresenter: ProfilePresenterProtocol {
     }
     
     private func cleanDataAndSwitchToSplash() {
-            self.cleanTokenStorage()
-            self.cleanCookies()
-            self.switchToSplashViewController()
+        cleanTokenStorage()
+        cleanCookies()
+        switchToSplashViewController()
     }
     
     private func cleanTokenStorage() {
