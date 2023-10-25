@@ -63,12 +63,14 @@ final class SplashViewController: UIViewController {
     }
     
     private func showNetworkError() {
+        
+        profileInfoService.cleanData()
+        
         let alertModel = AlertModel(
             title: "Что-то пошло не так(",
             message: "Не удалось войти в систему",
             buttonText: "Ок",
             completion: { _ in
-                self.profileInfoService.cleanData()
                 self.showAuthViewController()
             })
         alertPresenter.showAlert(alertModel: alertModel)
