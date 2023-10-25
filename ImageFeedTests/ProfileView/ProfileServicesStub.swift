@@ -9,11 +9,13 @@ import Foundation
 @testable import ImageFeed
 
 final class ProfileInfoServiceStub: ProfileInfoServiceProtocol {
-    
     var profile: ImageFeed.Profile?
     
     func fetchProfile(_ token: String, completion: @escaping (Result<ImageFeed.Profile, Error>) -> Void) {
         //code
+    }
+    func cleanData() {
+        //<#code#>
     }
 }
 

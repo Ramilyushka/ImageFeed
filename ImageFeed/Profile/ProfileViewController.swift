@@ -102,6 +102,7 @@ extension ProfileViewController {
             target: self,
             action: #selector(didTapLogoutButton))
         
+        button.accessibilityIdentifier = "logout button"
         button.tintColor = .ypRed
         
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -117,6 +118,7 @@ extension ProfileViewController {
     
     private func createFullNameLabel() {
         let label = UILabel()
+        label.accessibilityIdentifier = "Name Lastname"
         label.text = "Екатерина Новикова"
         label.font = UIFont.boldSystemFont(ofSize: 23)
         label.textColor = .ypWhite
@@ -133,6 +135,7 @@ extension ProfileViewController {
     
     private func createLoginNameLabel() {
         let label = UILabel()
+        label.accessibilityIdentifier = "@username"
         label.text = "@ekaterina_nov"
         label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = .ypGray

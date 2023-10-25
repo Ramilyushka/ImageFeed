@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import WebKit
 
 public protocol ProfileInfoServiceProtocol {
     var profile: Profile? { get }
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void)
+    func cleanData()
 }
 
 final class ProfileInfoService: ProfileInfoServiceProtocol {
@@ -46,7 +48,7 @@ final class ProfileInfoService: ProfileInfoServiceProtocol {
             case .success(let profileResult):
                 
                 let profile = Profile(result: profileResult)
-                self.profile = self.makeProfile(profile)
+                self.profile = profile
                 completion(.success(profile))
                 
             case .failure(let error):
@@ -55,10 +57,22 @@ final class ProfileInfoService: ProfileInfoServiceProtocol {
         }
     }
     
-    func makeProfile(_ profile: Profile?) -> Profile? {
-        guard let _ = profile else {
-            return nil
+    func cleanData() {
+        cleanCookies()
+        if OAuth2TokenStorage.shared.removeToken() {
+            OAuth2TokenStorage.shared.token = nil
         }
-        return profile
+    }
+    
+    private func cleanCookies() {
+       // Очищаем все куки из хранилища.
+       HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+       // Запрашиваем все данные из локального хранилища.
+       WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+          // Массив полученных записей удаляем из хранилища.
+          records.forEach { record in
+             WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+          }
+       }
     }
 }

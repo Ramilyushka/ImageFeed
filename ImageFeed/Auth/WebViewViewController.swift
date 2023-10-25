@@ -34,6 +34,7 @@ final class WebViewViewController: UIViewController&WebViewViewControllerProtoco
         super.viewDidLoad()
         
         webView.navigationDelegate = self
+        webView.accessibilityIdentifier = "UnsplashWebView"
         
         estimatedProgressObservation = webView.observe(
                     \.estimatedProgress,
