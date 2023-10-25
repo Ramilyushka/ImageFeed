@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol ImagesListServiceProtocol {
+protocol ImagesListServiceProtocol {
     var photos: [Photo] { get }
     func fetchPhotosNextPage()
     func fetchChangeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void)

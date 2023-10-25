@@ -1,7 +1,7 @@
 import UIKit
 import Kingfisher
 
-public protocol ImagesListViewControllerProtocol {
+protocol ImagesListViewControllerProtocol {
     var presenter: ImagesListPresenterProtocol! { get set }
     var tableView: UITableView! { get set }
     func updateTableViewAnimated(oldCount: Int, newCount: Int)

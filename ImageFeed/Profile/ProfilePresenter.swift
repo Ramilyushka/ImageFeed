@@ -5,10 +5,9 @@
 //  Created by Наиль on 23/10/23.
 //
 
-import Foundation
 import UIKit
 
-public protocol ProfilePresenterProtocol {
+protocol ProfilePresenterProtocol {
     var view: ProfileViewControllerProtocol? { get set }
     func viewDidLoad()
     func createLogoutAlert() -> UIAlertController

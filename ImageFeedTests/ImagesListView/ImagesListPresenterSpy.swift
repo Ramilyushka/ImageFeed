@@ -5,9 +5,8 @@
 //  Created by Наиль on 25/10/23.
 //
 
-import Foundation
-@testable import ImageFeed
 import UIKit
+@testable import ImageFeed
 
 final class ImagesListPresenterSpy: ImagesListPresenterProtocol {
 

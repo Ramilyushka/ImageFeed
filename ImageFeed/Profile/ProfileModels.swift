@@ -5,7 +5,7 @@
 //  Created by Наиль on 04/10/23.
 //
 
-public struct Profile {
+struct Profile {
     let userName: String
     let fullName: String
     let bio: String?

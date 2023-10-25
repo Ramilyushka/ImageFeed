@@ -10,6 +10,8 @@ import XCTest
 final class ImageFeedUITests: XCTestCase {
 
     private let app = XCUIApplication() // переменная приложения
+    private let login = ""
+    private let password = ""
     
     override func setUpWithError() throws {
         continueAfterFailure = false // настройка выполнения тестов, которая прекратит выполнения тестов, если в тесте что-то пошло не так
@@ -30,7 +32,7 @@ final class ImageFeedUITests: XCTestCase {
         let loginTextField = webView.descendants(matching: .textField).element
         XCTAssertTrue(loginTextField.waitForExistence(timeout: 5))
         loginTextField.tap()
-        loginTextField.typeText("")
+        loginTextField.typeText(login)
         webView.swipeUp()
         
         app.toolbars["Toolbar"].buttons["Done"].tap()
@@ -38,7 +40,7 @@ final class ImageFeedUITests: XCTestCase {
         let passwordTextField = webView.descendants(matching: .secureTextField).element
         XCTAssertTrue(passwordTextField.waitForExistence(timeout: 5))
         passwordTextField.tap()
-        passwordTextField.typeText("")
+        passwordTextField.typeText(password)
         webView.swipeUp()
         
         print(app.debugDescription)
