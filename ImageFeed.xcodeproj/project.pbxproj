@@ -49,6 +49,9 @@
 		A8FA49482AE708CF004C2A57 /* ProfilePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49472AE708CF004C2A57 /* ProfilePresenterTests.swift */; };
 		A8FA494A2AE7DC7C004C2A57 /* ProfileServicesStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49492AE7DC7C004C2A57 /* ProfileServicesStub.swift */; };
 		A8FA494C2AE841D7004C2A57 /* ImagesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA494B2AE841D7004C2A57 /* ImagesListPresenter.swift */; };
+		A8FA494F2AE856E3004C2A57 /* ImagesListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA494E2AE856E3004C2A57 /* ImagesListTests.swift */; };
+		A8FA49532AE86454004C2A57 /* ImagesListPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49522AE86454004C2A57 /* ImagesListPresenterSpy.swift */; };
+		A8FA49552AE871B2004C2A57 /* ImagesListServicesStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FA49542AE871B2004C2A57 /* ImagesListServicesStub.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +107,9 @@
 		A8FA49472AE708CF004C2A57 /* ProfilePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterTests.swift; sourceTree = "<group>"; };
 		A8FA49492AE7DC7C004C2A57 /* ProfileServicesStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServicesStub.swift; sourceTree = "<group>"; };
 		A8FA494B2AE841D7004C2A57 /* ImagesListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListPresenter.swift; sourceTree = "<group>"; };
+		A8FA494E2AE856E3004C2A57 /* ImagesListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListTests.swift; sourceTree = "<group>"; };
+		A8FA49522AE86454004C2A57 /* ImagesListPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListPresenterSpy.swift; sourceTree = "<group>"; };
+		A8FA49542AE871B2004C2A57 /* ImagesListServicesStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListServicesStub.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +233,7 @@
 		A8FA492F2AE6C895004C2A57 /* ImageFeedTests */ = {
 			isa = PBXGroup;
 			children = (
+				A8FA494D2AE85685004C2A57 /* ImagesListView */,
 				A8FA493E2AE6F2BA004C2A57 /* ProfileView */,
 				A8FA493D2AE6F2A7004C2A57 /* WebView */,
 			);
@@ -253,6 +260,16 @@
 				A8FA49492AE7DC7C004C2A57 /* ProfileServicesStub.swift */,
 			);
 			path = ProfileView;
+			sourceTree = "<group>";
+		};
+		A8FA494D2AE85685004C2A57 /* ImagesListView */ = {
+			isa = PBXGroup;
+			children = (
+				A8FA494E2AE856E3004C2A57 /* ImagesListTests.swift */,
+				A8FA49522AE86454004C2A57 /* ImagesListPresenterSpy.swift */,
+				A8FA49542AE871B2004C2A57 /* ImagesListServicesStub.swift */,
+			);
+			path = ImagesListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,7 +420,10 @@
 			files = (
 				A8FA49402AE6F306004C2A57 /* ProfileViewControllerTests.swift in Sources */,
 				A8FA49382AE6D136004C2A57 /* WebViewViewCotrollerSpy.swift in Sources */,
+				A8FA49552AE871B2004C2A57 /* ImagesListServicesStub.swift in Sources */,
 				A8FA49312AE6C895004C2A57 /* WebViewTests.swift in Sources */,
+				A8FA494F2AE856E3004C2A57 /* ImagesListTests.swift in Sources */,
+				A8FA49532AE86454004C2A57 /* ImagesListPresenterSpy.swift in Sources */,
 				A8FA494A2AE7DC7C004C2A57 /* ProfileServicesStub.swift in Sources */,
 				A8FA493A2AE6D1A0004C2A57 /* WebViewPresenterSpy.swift in Sources */,
 				A8FA49482AE708CF004C2A57 /* ProfilePresenterTests.swift in Sources */,

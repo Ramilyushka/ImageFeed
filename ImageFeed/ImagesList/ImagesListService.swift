@@ -46,7 +46,6 @@ final class ImagesListService: ImagesListServiceProtocol {
                 for photoResult in photoResultArray {
                     self.photos.append(Photo(result: photoResult))
                 }
-                
                 lastLoadedPage += 1
                 
                 NotificationCenter.default.post(
@@ -54,8 +53,8 @@ final class ImagesListService: ImagesListServiceProtocol {
                     object: self,
                     userInfo: ["photos": self.photos])
                 
-            case .failure(let error):
-                print(error)
+            case .failure(_):
+                return
             }
         }
     }

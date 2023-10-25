@@ -40,7 +40,6 @@ final class SplashViewController: UIViewController {
         if let token = oAuth2TokenStorage.token {
             UIBlockingProgressHUD.show()
             fetchProfile(token: token)
-            imagesListService.fetchPhotosNextPage()
         } else {
             showAuthViewController()
         }

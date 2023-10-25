@@ -24,6 +24,8 @@ final class ProfilePresenter: ProfilePresenterProtocol {
     let profileImageService: ProfileImageServiceProtocol
     private var profileImageServiceObserver: NSObjectProtocol?
     
+    let imagesListService = ImagesListService.shared
+    
     init() {
         self.profileInfoService = ProfileInfoService.shared
         self.profileImageService = ProfileImageService.shared

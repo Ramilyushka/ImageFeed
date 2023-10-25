@@ -2,28 +2,36 @@ import UIKit
 import Kingfisher
 
 public protocol ImagesListViewControllerProtocol {
-    //var presenter: ImagesListPresenterProtocol! { get set }
+    var presenter: ImagesListPresenterProtocol! { get set }
+    var tableView: UITableView! { get set }
     func updateTableViewAnimated(oldCount: Int, newCount: Int)
+    func setTableView()
 }
 
-final class ImagesListViewController: UIViewController, ImagesListViewControllerProtocol {
+final class ImagesListViewController: UIViewController&ImagesListViewControllerProtocol {
     
     let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     
     var presenter: ImagesListPresenterProtocol!
     
-    @IBOutlet private var tableView: UITableView!
+    @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-        
         if presenter == nil {
-            presenter = ImagesListPresenter(imagesListService: ImagesListService.shared)
+            presenter = ImagesListPresenter(view: self, imagesListService: ImagesListService.shared)
         }
         
+        presenter.view = self
+        //presenter.fetchPhotos()
         presenter.viewDidLoad()
+    }
+    
+    func setTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
     
     func updateTableViewAnimated(oldCount: Int, newCount: Int) {
@@ -39,7 +47,7 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
 extension ImagesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.photos.count
+        return presenter.photos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,13 +88,8 @@ extension ImagesListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let size = presenter.photos[indexPath.row].size
-        let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
-        let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
-        let imageWidth = size.width
-        let scale = imageViewWidth / imageWidth
-        let cellHeight = size.height * scale + imageInsets.top + imageInsets.bottom
-        return cellHeight
+        let sizePhoto = presenter.photos[indexPath.row].size
+        return presenter.calculateHeightRow(size: sizePhoto, widthBounds: tableView.bounds.width)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -101,16 +104,18 @@ extension ImagesListViewController: ImagesListCellDelegate {
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         
+        let photo = presenter.photos[indexPath.row]
+        
         UIBlockingProgressHUD.show()
-        presenter.fetchChangeLike(index: indexPath.row) { result in
+        presenter.fetchChangeLike(photo: photo) { result in
             switch result {
             case .success():
-                //self.photos = self.presenter.photos
                 cell.setIsLiked(isLike: self.presenter.photos[indexPath.row].isLiked)
-            case .failure(let error):
-                print(error)
+                UIBlockingProgressHUD.dismiss()
+            case .failure(_):
+                UIBlockingProgressHUD.dismiss()
+                return
             }
-            UIBlockingProgressHUD.dismiss()
         }
     }
 }
