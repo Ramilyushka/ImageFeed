@@ -18,7 +18,6 @@ final class SplashViewController: UIViewController {
     
     private let profileInfoService = ProfileInfoService.shared
     private let profileImageService = ProfileImageService.shared
-    private let imagesListService = ImagesListService.shared
     
     private var alertPresenter = AlertPresenter()
     
@@ -40,7 +39,6 @@ final class SplashViewController: UIViewController {
         if let token = oAuth2TokenStorage.token {
             UIBlockingProgressHUD.show()
             fetchProfile(token: token)
-            imagesListService.fetchPhotosNextPage()
         } else {
             showAuthViewController()
         }
@@ -65,12 +63,14 @@ final class SplashViewController: UIViewController {
     }
     
     private func showNetworkError() {
+        
+        profileInfoService.cleanData()
+        
         let alertModel = AlertModel(
             title: "Что-то пошло не так(",
             message: "Не удалось войти в систему",
             buttonText: "Ок",
             completion: { _ in
-                let _ = OAuth2TokenStorage().removeToken()
                 self.showAuthViewController()
             })
         alertPresenter.showAlert(alertModel: alertModel)
@@ -92,7 +92,6 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let token):
                 self.fetchProfile(token: token)
-                self.imagesListService.fetchPhotosNextPage()
             case .failure(_):
                 UIBlockingProgressHUD.dismiss()
                 self.showNetworkError()

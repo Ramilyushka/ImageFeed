@@ -12,8 +12,15 @@ final class ImagesListCell: UITableViewCell {
     weak var delegate: ImagesListCellDelegate?
     
     @IBOutlet weak var cellImageView: UIImageView!
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var likeButton: UIButton!
+    
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        return formatter
+    }()
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -27,5 +34,13 @@ final class ImagesListCell: UITableViewCell {
     
     func setIsLiked(isLike: Bool){
         likeButton.setImage(UIImage(named: isLike ? "like_active" : "like_no_active"), for: .normal)
+    }
+    
+    func setDate(createdAt: Date?){
+        if let date = createdAt {
+            dateLabel.text = dateFormatter.string(from: date)
+        } else {
+            dateLabel.text = ""
+        }
     }
 }

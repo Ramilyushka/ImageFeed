@@ -6,8 +6,15 @@
 //
 
 import Foundation
+import WebKit
 
-final class ProfileInfoService {
+protocol ProfileInfoServiceProtocol {
+    var profile: Profile? { get }
+    func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void)
+    func cleanData()
+}
+
+final class ProfileInfoService: ProfileInfoServiceProtocol {
     
     static let shared = ProfileInfoService()
     
@@ -48,5 +55,24 @@ final class ProfileInfoService {
                 completion(.failure(error))
             }
         }
+    }
+    
+    func cleanData() {
+        cleanCookies()
+        if OAuth2TokenStorage.shared.removeToken() {
+            OAuth2TokenStorage.shared.token = nil
+        }
+    }
+    
+    private func cleanCookies() {
+       // Очищаем все куки из хранилища.
+       HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
+       // Запрашиваем все данные из локального хранилища.
+       WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+          // Массив полученных записей удаляем из хранилища.
+          records.forEach { record in
+             WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+          }
+       }
     }
 }

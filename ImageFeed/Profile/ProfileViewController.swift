@@ -7,12 +7,17 @@
 
 import UIKit
 import Kingfisher
-import WebKit
 
-final class ProfileViewController: UIViewController {
+protocol ProfileViewControllerProtocol {
+    var presenter: ProfilePresenterProtocol? { get set }
+    func updateProfileDetails(profile: Profile)
+    func updateAvatar(url: URL)
+    func showLogOutAlert()
+}
+
+final class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     
-    private let profileService = ProfileInfoService.shared
-    private var profileImageServiceObserver: NSObjectProtocol?
+    var presenter: ProfilePresenterProtocol?
     
     @IBOutlet private weak var logoutButton: UIButton!
     @IBOutlet private weak var avatarImageView: UIImageView!
@@ -25,85 +30,35 @@ final class ProfileViewController: UIViewController {
         
         createView()
         
-        updateProfileDetails(profile: profileService.profile)
-        
-        profileImageServiceObserver = NotificationCenter.default
-            .addObserver(
-                forName: ProfileImageService.didChangeNotification,
-                object: nil,
-                queue: .main) { [weak self] _ in
-                    guard let self = self else { return }
-                    self.updateAvatar()
-                }
-         updateAvatar()
+        if presenter == nil {
+            presenter = ProfilePresenter(
+                profileInfoService: ProfileInfoService.shared,
+                profileImageService: ProfileImageService.shared)
+        }
+        presenter?.viewDidLoad()
     }
     
-    private func updateProfileDetails(profile: Profile?) {
-        guard let profile = profile else { return }
+    func updateProfileDetails(profile: Profile) {
         fullNameLabel.text = profile.fullName
         loginNameLabel.text = profile.loginName
         bioDescriptionLabel.text = profile.bio
     }
     
-    private func updateAvatar() {
-        guard
-            let avatarImageURL = ProfileImageService.shared.avatarImageURL,
-            let url = URL(string: avatarImageURL)
-        else { return }
-        
+    func updateAvatar(url: URL) {
         avatarImageView.kf.indicatorType = .activity
         avatarImageView.kf.setImage(
             with: url,
             placeholder: UIImage(named: "stub_profile"))
     }
     
-    @IBAction func didTapLogoutButton(_ sender: Any) {
-     
-        let alert = UIAlertController(
-            title: "Пока, пока!",
-            message: "Уверены что хотите выйти?",
-            preferredStyle: .alert)
-        
-        let actionCancel = UIAlertAction(
-            title: "Да",
-            style: .default,
-            handler: {_ in
-                self.cleanTokenStorage()
-                self.cleanCookies()
-                self.showSplashViewController()
-            })
-        alert.addAction(actionCancel)
-        
-        let actionContinue = UIAlertAction(
-            title: "Нет",
-            style: .default,
-            handler: nil)
-        alert.addAction(actionContinue)
-        
-        self.present(alert, animated: true)
+    func showLogOutAlert() {
+        if let alert = presenter?.createLogoutAlert() {
+            present(alert, animated: true)
+        }
     }
     
-    private func cleanTokenStorage(){
-        let isTokenRemoved  = OAuth2TokenStorage.shared.removeToken()
-        print("Was the token removed? \(isTokenRemoved)")
-    }
-    
-    private func cleanCookies() {
-       // Очищаем все куки из хранилища.
-       HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
-       // Запрашиваем все данные из локального хранилища.
-       WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
-          // Массив полученных записей удаляем из хранилища.
-          records.forEach { record in
-             WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
-          }
-       }
-    }
-    
-    private func showSplashViewController(){
-        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
-        let splashViewController = SplashViewController()
-        window.rootViewController = splashViewController
+    @IBAction private func didTapLogoutButton() {
+        showLogOutAlert()
     }
 }
 
@@ -147,6 +102,7 @@ extension ProfileViewController {
             target: self,
             action: #selector(didTapLogoutButton))
         
+        button.accessibilityIdentifier = "logout button"
         button.tintColor = .ypRed
         
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -162,6 +118,7 @@ extension ProfileViewController {
     
     private func createFullNameLabel() {
         let label = UILabel()
+        label.accessibilityIdentifier = "Name Lastname"
         label.text = "Екатерина Новикова"
         label.font = UIFont.boldSystemFont(ofSize: 23)
         label.textColor = .ypWhite
@@ -178,6 +135,7 @@ extension ProfileViewController {
     
     private func createLoginNameLabel() {
         let label = UILabel()
+        label.accessibilityIdentifier = "@username"
         label.text = "@ekaterina_nov"
         label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = .ypGray

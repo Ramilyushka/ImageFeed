@@ -7,7 +7,13 @@
 
 import Foundation
 
-final class ImagesListService {
+protocol ImagesListServiceProtocol {
+    var photos: [Photo] { get }
+    func fetchPhotosNextPage()
+    func fetchChangeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void)
+}
+
+final class ImagesListService: ImagesListServiceProtocol {
     
     static let shared = ImagesListService()
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
@@ -40,7 +46,6 @@ final class ImagesListService {
                 for photoResult in photoResultArray {
                     self.photos.append(Photo(result: photoResult))
                 }
-                
                 lastLoadedPage += 1
                 
                 NotificationCenter.default.post(
@@ -48,13 +53,13 @@ final class ImagesListService {
                     object: self,
                     userInfo: ["photos": self.photos])
                 
-            case .failure(let error):
-                print(error)
+            case .failure(_):
+                return
             }
         }
     }
     
-    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+    func fetchChangeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
         assert(Thread.isMainThread)
         taskChangeLike?.cancel()
         
